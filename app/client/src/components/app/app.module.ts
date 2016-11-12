@@ -5,7 +5,7 @@ import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from '../login/login.component';
-import { DashboardComponent } from '../dashboard/dashboard.component';
+import { WallComponent } from '../wall/wall.component';
 
 @NgModule({
   imports: [
@@ -13,14 +13,14 @@ import { DashboardComponent } from '../dashboard/dashboard.component';
     MaterialModule.forRoot(),
     RouterModule.forRoot([
       { path: 'login', component: LoginComponent },
-      { path: 'dashboard', component: DashboardComponent },
+      { path: 'wall', component: WallComponent },
       { path: '**', component: LoginComponent }
     ]),
   ],
   declarations: [
     AppComponent,
     LoginComponent,
-    DashboardComponent,
+    WallComponent,
   ],
   bootstrap: [ AppComponent ]
 })
