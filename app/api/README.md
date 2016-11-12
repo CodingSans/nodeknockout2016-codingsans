@@ -59,8 +59,8 @@ GET `/api/v2/channel/:channelId`
 Returns: 200
 ```json
 {
-  "count": 1,
-  "data": [
+  "count": 1,  // found count
+  "data": [    // limited results
     {
       "name": "general",
       "ownerName": "system",
@@ -102,8 +102,8 @@ GET `/api/v2/channel/:channelId/message?s&l`
 Returns: 200
 ```json
 {
-  "count": 1, // found count
-  "data": [   // limited results
+  "count": 1,  // found count
+  "data": [    // limited results
     {
       // message content
     }
