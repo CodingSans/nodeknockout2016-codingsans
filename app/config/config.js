@@ -34,7 +34,21 @@ const conf = convict({
       default: 'mongodb://localhost:27017/',
       env: 'MONGO_CONNECTION_STRING'
     }
-  }
+  },
+  client: {
+    prebuilded: {
+      format: Boolean,
+      default: false,
+      env: 'CLIENT_PREBUILDED',
+    },
+    included: {
+      debug: {
+        format: Boolean,
+        default: false,
+        env: 'CLIENT_DEBUG',
+      },
+    },
+  },
 })
 
 // Load environment dependent configuration
