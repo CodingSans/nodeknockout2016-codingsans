@@ -1,8 +1,8 @@
 'use strict'
 
 const path = require('path')
-const koaRouter = require('koa-router')
 
+const koa = require('koa')
 const serve = require('koa-static')
 const historyApiFallback = require('koa-connect-history-api-fallback')
 
@@ -16,9 +16,9 @@ function * init () {
 }
 
 function * initDev () {
-  const router = koaRouter()
+  const app = koa()
 
-  router.get('/', historyApiFallback({
+  app.use(historyApiFallback({
     verbose: false
   }))
 
@@ -27,25 +27,25 @@ function * initDev () {
   const webpackDev = require('koa-webpack-dev-middleware')
 
   const compiler = webpack(webpackConfig)
-  router.get('/', webpackDev(compiler, {
+  app.use(webpackDev(compiler, {
     noInfo: true,
     publicPath: webpackConfig.output.publicPath
   }))
 
-  return router
+  return app
 }
 
 function * initProd () {
-  const router = koaRouter()
+  const app = koa()
 
-  router.get('/', historyApiFallback({
+  app.use(historyApiFallback({
     verbose: false
   }))
 
   // last serve assets
-  router.get('/', serve(path.join(__dirname, '/build')))
+  app.use(serve(path.join(__dirname, '/build')))
 
-  return router
+  return app
 }
 
 module.exports.init = init
