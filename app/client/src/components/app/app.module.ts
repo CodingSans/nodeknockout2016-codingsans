@@ -5,19 +5,22 @@ import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from '../login/login.component';
+import { DashboardComponent } from '../dashboard/dashboard.component';
 
 @NgModule({
   imports: [
     BrowserModule,
     MaterialModule.forRoot(),
     RouterModule.forRoot([
-      { path: '', redirectTo: '/login', pathMatch: 'full' },
       { path: 'login', component: LoginComponent },
+      { path: 'dashboard', component: DashboardComponent },
+      { path: '**', component: LoginComponent }
     ]),
   ],
   declarations: [
     AppComponent,
     LoginComponent,
+    DashboardComponent,
   ],
   bootstrap: [ AppComponent ]
 })
