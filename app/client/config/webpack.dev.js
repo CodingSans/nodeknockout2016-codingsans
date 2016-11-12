@@ -1,10 +1,9 @@
-var webpack = require('webpack');
-require('awesome-typescript-loader');
-require('angular2-template-loader');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var helpers = require('./helpers');
-var path = require('path');
+const webpack = require('webpack')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const helpers = require('./helpers')
+const path = require('path')
+const config = require('../../config/config')
 
 module.exports.dev = () => ({
   context: path.join(__dirname, '..'),
@@ -63,8 +62,9 @@ module.exports.dev = () => ({
 
     new HtmlWebpackPlugin({
       title: 'Dstruct',
+      maps_api: config.client.mapsApi,
       template: path.join(__dirname, '../src/indexTemplate.ejs'),
-      inject: 'body',
-    }),
+      inject: 'body'
+    })
   ]
-});
+})
