@@ -1,0 +1,17 @@
+FROM node:6.7
+MAINTAINER CodingSans
+ENV NPM_CONFIG_LOGLEVEL=warn
+RUN npm install -g yarn
+RUN mkdir -p /app
+COPY . /app
+WORKDIR /app
+RUN yarn install
+EXPORT /app
+
+FROM mhart/alpine-node:base-6
+RUN mkdir -p /server
+RUN apk add --update bash && rm -rf /var/cache/apk/*
+IMPORT /app/ /server
+EXPOSE 5000
+CMD ["node", "/server/app/app.js"]
+TAG dstruct:{{ or .Env.NODE_ENV "develop" }}
