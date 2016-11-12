@@ -1,3 +1,5 @@
+'use strict'
+
 const express = require('express')
 
 const config = require('./config/config.js')
@@ -6,8 +8,7 @@ const db = require('./dal/db.js')
 const app = express()
 
 db.start().then(() => {
-  const connectionString = `${config.mongo.host}:${config.mongo.port}/${config.mongo.name}`
-  console.log(`MongoDB connection estabilished at ${connectionString}`)
+  console.log('MongoDB connection estabilished.')
 
   app.set('port', config.server.port)
 
@@ -16,6 +17,6 @@ db.start().then(() => {
   })
 
   app.listen(app.get('port'), function () {
-    console.log(`Node app is running at localhost: ${app.get('port')}`)
+    console.log(`Node app is running at localhost: ${app.get('port')}.`)
   })
 })

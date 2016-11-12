@@ -29,30 +29,10 @@ const conf = convict({
     }
   },
   mongo: {
-    user: {
+    connectionString: {
       format: String,
-      default: '',
-      env: 'MONGO_USER'
-    },
-    password: {
-      format: String,
-      default: '',
-      env: 'MONGO_PASSWORD'
-    },
-    host: {
-      format: String,
-      default: 'localhost',
-      env: 'MONGO_HOST'
-    },
-    port: {
-      format: 'port',
-      default: 27017,
-      env: 'MONGO_PORT'
-    },
-    name: {
-      format: String,
-      default: '',
-      env: 'MONGO_NAME'
+      default: 'mongodb://localhost:27017/',
+      env: 'MONGO_CONNECTION_STRING'
     }
   }
 })

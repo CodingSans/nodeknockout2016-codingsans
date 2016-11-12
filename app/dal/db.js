@@ -1,3 +1,5 @@
+'use strict'
+
 const Mongoose = require('mongoose')
 
 const config = require('../config/config.js')
@@ -8,12 +10,8 @@ const mongoose = Mongoose.createConnection()
 
 function start () {
   return mongoose.open(
-    config.mongo.host,
-    config.mongo.name,
-    config.mongo.port,
+    config.mongo.connectionString,
     {
-      user: config.mongo.user,
-      pass: config.mongo.password,
       server: {
         socketOptions: {
           keepAlive: 300000,
