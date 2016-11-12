@@ -62,7 +62,7 @@ module.exports.dev = () => ({
     }),
 
     new HtmlWebpackPlugin({
-      title: 'DStruct',
+      title: 'Dstruct',
       template: path.join(__dirname, '../src/indexTemplate.ejs'),
       inject: 'body',
     }),
