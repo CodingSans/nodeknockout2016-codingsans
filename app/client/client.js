@@ -1,24 +1,23 @@
 'use strict'
 
-const koa = require('koa')
 const path = require('path')
 const serve = require('koa-static')
-const koaRoute = require('koa-route')
+const koaRouter = require('koa-router')
 
 const { errorHandler } = require('../util/middleware/errorHandler')
 
 function * init () {
-  const app = koa()
+  const router = koaRouter()
 
-  app.use(errorHandler)
+  router.use(errorHandler)
 
-  app.use(koaRoute.get('/', function * () {
+  router.get('/', function * () {
     this.body = 'Hello from Node Knockout 2016 CodingSans!'
-  }))
+  })
 
-  app.use(serve(path.join(__dirname, '/public')))
+  router.use(serve(path.join(__dirname, '/public')))
 
-  return app
+  return router
 }
 
 module.exports.init = init

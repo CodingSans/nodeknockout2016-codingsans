@@ -2,8 +2,9 @@
 
 const co = require('co')
 const koa = require('koa')
-const mount = require('koa-mount')
+const Boom = require('Boom')
 const logger = require('koa-logger')
+const koaRouter = require('koa-router')
 
 const config = require('./config/config')
 const db = require('./dal/db')
@@ -12,17 +13,23 @@ const apiServer = require('./api/api')
 const clientServer = require('./client/client')
 
 const start = co.wrap(function * start () {
-  const app = koa()
+  const router = koaRouter()
 
-  app.use(logger())
+  router.use(logger())
 
-  const { apiApp, clientApp } = yield {
-    clientApp: clientServer.init(),
-    apiApp: apiServer.init()
+  const routes = yield {
+    client: clientServer.init(),
+    api: apiServer.init()
   }
 
-  app.use(mount('/api', apiApp))
-  app.use(mount('/', clientApp))
+  router.use('/api', routes.api.routes(), routes.api.allowedMethods())
+  router.use('/', routes.client.routes(), routes.client.allowedMethods())
+
+  const app = koa()
+
+  app
+    .use(router.routes())
+    .use(router.allowedMethods())
 
   yield db.start()
 

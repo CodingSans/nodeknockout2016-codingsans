@@ -2,6 +2,7 @@
 
 - [/api/v1](#apiv1)
 - [/api/v2](#apiv2)
+  - [/api/v2/status](#apiv2status)
   - [/api/v2/channel](#apiv2channel)
     - [GET /api/v2/channel](#get-apiv2channel)
     - [/api/v2/channel/:channelId](#apiv2channelchannelid)
@@ -19,6 +20,19 @@
 Reserved for Oauth and Slack
 
 # /api/v2
+
+## /api/v2/status
+
+Status
+
+GET `/api/v2/status`
+
+Returns: 200
+```
+{
+  "status": "OK"
+}
+```
 
 ## /api/v2/channel
 
