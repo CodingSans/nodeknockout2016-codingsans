@@ -2,9 +2,9 @@
   "name": "nko2016-codingsans",
   "version": "0.0.1",
   "description": "CodingSans NodeKnockout",
-  "main": "index.js",
+  "main": "app/app.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node app/app.js"
   },
   "dependencies": {
     "express": "^4.13.3"
