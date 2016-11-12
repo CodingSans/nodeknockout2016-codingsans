@@ -5,7 +5,7 @@
   "main": "app/app.js",
   "scripts": {
     "start": "node app/app.js",
-    "lint": "./node_modules/.bin/standard"
+    "lint": "standard"
   },
   "dependencies": {
     "convict": "^1.5.0",
