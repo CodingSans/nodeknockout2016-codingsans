@@ -1,0 +1,20 @@
+FROM node:6.7
+MAINTAINER CodingSans
+RUN npm install -g yarn
+RUN mkdir -p /app
+COPY . /app
+WORKDIR /app
+RUN yarn install
+EXPORT /app
+
+FROM mhart/alpine-node:base-6
+RUN mkdir -p /server
+RUN apk add --update bash && rm -rf /var/cache/apk/*
+IMPORT /app/ /server
+EXPOSE 5000
+CMD ["node", "/server/app/app.js"]
+{{ if .NODE_ENV }}
+  TAG dstruct:{{ .NODE_ENV }}
+{{ else }}
+  TAG dstruct:development
+{{ end }}
