@@ -1,7 +1,7 @@
 'use strict'
 
-const mongoose = require('../db')
-const schema = require('./channelSchema')
+const { mongoose } = require('../db')
+const { schema } = require('./channelSchema')
 
 const name = 'Channel'
 

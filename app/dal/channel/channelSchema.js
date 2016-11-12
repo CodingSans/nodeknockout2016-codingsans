@@ -2,9 +2,10 @@
 
 const ONE_DAY = 24 * 60 * 60
 
-const mongoose = require('../db')
+const Mongoose = require('mongoose')
+const Schema = Mongoose.Schema
 
-const schema = mongoose.Schema({
+const schema = new Schema({
   name: String,
   public: {
     type: Boolean,
@@ -12,7 +13,7 @@ const schema = mongoose.Schema({
   },
   lastMessageDate: {
     type: Date,
-    default: new Date(),
+    default: () => new Date(),
     expires: ONE_DAY
   }
 })
