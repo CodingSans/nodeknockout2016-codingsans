@@ -7,3 +7,5 @@ import '@angular/http';
 import '@angular/router';
 // RxJS
 import 'rxjs';
+// identicon.js
+import 'identicon.js';

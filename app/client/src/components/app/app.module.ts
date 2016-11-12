@@ -24,5 +24,4 @@ import { WallComponent } from '../wall/wall.component';
   ],
   bootstrap: [ AppComponent ]
 })
-
 export class AppModule { }
