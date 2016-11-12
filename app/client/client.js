@@ -1,24 +1,51 @@
-'use strict'
+'use strict';
 
-const koa = require('koa')
-const path = require('path')
-const serve = require('koa-static')
-const koaRoute = require('koa-route')
+const path = require('path');
 
-const { errorHandler } = require('../util/middleware/errorHandler')
+const koa = require('koa');
+const serve = require('koa-static');
+const historyApiFallback = require('koa-connect-history-api-fallback');
 
-function * init () {
-  const app = koa()
+const config = require('../config/config');
 
-  app.use(errorHandler)
-
-  app.use(koaRoute.get('/', function * () {
-    this.body = 'Hello from Node Knockout 2016 CodingSans!'
-  }))
-
-  app.use(serve(path.join(__dirname, '/public')))
-
-  return app
+function * init() {
+  if (config.client.prebuilded) {
+    return yield initProd();
+  }
+  return yield initDev();
 }
 
-module.exports.init = init
+function * initDev() {
+  const app = koa();
+
+  app.use(historyApiFallback({
+    verbose: false,
+  }));
+
+  const webpack = require('webpack');
+  const webpackConfig = require('./webpack.config.js').dev();
+  const webpackDev = require('koa-webpack-dev-middleware');
+
+  const compiler = webpack(webpackConfig);
+  app.use(webpackDev(compiler, {
+    noInfo: true,
+    publicPath: webpackConfig.output.publicPath,
+  }));
+
+  return app;
+}
+
+function * initProd() {
+  const app = koa();
+
+  app.use(historyApiFallback({
+    verbose: false,
+  }));
+
+  // last serve assets
+  app.use(serve(path.join(__dirname, '/build')));
+
+  return app;
+}
+
+module.exports.init = init;
