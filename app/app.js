@@ -16,13 +16,13 @@ const start = co.wrap(function * start () {
 
   app.use(logger())
 
-  const { apiApp, clientApp } = yield {
-    clientApp: clientServer.init(),
-    apiApp: apiServer.init()
+  const routes = yield {
+    api: apiServer.init(),
+    client: clientServer.init()
   }
 
-  app.use(mount('/api', apiApp))
-  app.use(mount('/', clientApp))
+  app.use(mount('/api', routes.api))
+  app.use(mount('/', routes.client))
 
   yield db.start()
 
