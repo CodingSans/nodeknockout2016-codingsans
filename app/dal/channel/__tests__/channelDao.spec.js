@@ -7,6 +7,7 @@ const ChannelDao = require('../channelDao')
 describe('Test channel dao', () => {
   before(function * () {
     yield initDatabase()
+    yield clearAllDb()
   })
 
   it('it should be empty', function * () {
@@ -33,9 +34,5 @@ describe('Test channel dao', () => {
     const channels = yield ChannelDao.getPublicChannels()
     assert.equal(channels.length, 1)
     assert.equal(channels[0].name, channel.name)
-  })
-
-  after(function * () {
-    yield clearAllDb()
   })
 })

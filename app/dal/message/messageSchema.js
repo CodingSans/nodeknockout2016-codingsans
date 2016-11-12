@@ -2,9 +2,9 @@
 
 const ONE_DAY = 24 * 60 * 60000
 
-const mongoose = require('../db')
+const Mongoose = require('mongoose')
 
-const schema = mongoose.Schema({
+const schema = Mongoose.Schema({
   channel: {
     type: String,
     required: true
