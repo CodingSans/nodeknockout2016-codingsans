@@ -6,6 +6,7 @@ const mount = require('koa-mount')
 const logger = require('koa-logger')
 
 const config = require('./config/config')
+const db = require('./dal/db.js')
 
 const apiServer = require('./api/api.js')
 const clientServer = require('./client/client.js')
@@ -22,6 +23,10 @@ const start = co.wrap(function * start () {
 
   app.use(mount('/api', apiApp))
   app.use(mount('/', clientApp))
+
+  yield db.start()
+
+  console.log('MongoDB connection estabilished.')
 
   yield new Promise((resolve) => {
     app.listen(config.server.port, '0.0.0.0', () => {
