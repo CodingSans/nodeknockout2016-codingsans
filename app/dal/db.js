@@ -2,7 +2,7 @@
 
 const Mongoose = require('mongoose')
 
-const config = require('../config/config.js')
+const config = require('../config/config')
 
 Mongoose.Promise = Promise
 

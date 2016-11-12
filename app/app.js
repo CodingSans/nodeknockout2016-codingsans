@@ -1,22 +1,41 @@
 'use strict'
 
-const express = require('express')
+const co = require('co')
+const koa = require('koa')
+const mount = require('koa-mount')
+const logger = require('koa-logger')
 
-const config = require('./config/config.js')
-const db = require('./dal/db.js')
+const config = require('./config/config')
+const db = require('./dal/db')
 
-const app = express()
+const apiServer = require('./api/api')
+const clientServer = require('./client/client')
 
-db.start().then(() => {
+const start = co.wrap(function * start () {
+  const app = koa()
+
+  app.use(logger())
+
+  const { apiApp, clientApp } = yield {
+    clientApp: clientServer.init(),
+    apiApp: apiServer.init()
+  }
+
+  app.use(mount('/api', apiApp))
+  app.use(mount('/', clientApp))
+
+  yield db.start()
+
   console.log('MongoDB connection estabilished.')
 
-  app.set('port', config.server.port)
-
-  app.get('/', function (request, response) {
-    response.send('Hello from Node Knockout 2016 CodingSans!')
+  yield new Promise((resolve) => {
+    app.listen(config.server.port, '0.0.0.0', () => {
+      console.log(`Listening on 0.0.0.0:${config.server.port}`)
+      return resolve()
+    })
   })
 
-  app.listen(app.get('port'), function () {
-    console.log(`Node app is running at localhost: ${app.get('port')}.`)
-  })
+  return app
 })
+
+start().catch((err) => setTimeout(() => { throw err }))
