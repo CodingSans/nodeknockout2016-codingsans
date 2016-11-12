@@ -1,14 +1,41 @@
-const express = require('express')
-const config = require('./config/config.js')
+'use strict'
 
-var app = express()
+const co = require('co')
+const koa = require('koa')
+const mount = require('koa-mount')
+const logger = require('koa-logger')
 
-app.set('port', config.server.port)
+const config = require('./config/config')
+const db = require('./dal/db')
 
-app.get('/', function (request, response) {
-  response.send('Hello from Node Knockout 2016 CodingSans!')
+const apiServer = require('./api/api')
+const clientServer = require('./client/client')
+
+const start = co.wrap(function * start () {
+  const app = koa()
+
+  app.use(logger())
+
+  const { apiApp, clientApp } = yield {
+    clientApp: clientServer.init(),
+    apiApp: apiServer.init()
+  }
+
+  app.use(mount('/api', apiApp))
+  app.use(mount('/', clientApp))
+
+  yield db.start()
+
+  console.log('MongoDB connection estabilished.')
+
+  yield new Promise((resolve) => {
+    app.listen(config.server.port, '0.0.0.0', () => {
+      console.log(`Listening on 0.0.0.0:${config.server.port}`)
+      return resolve()
+    })
+  })
+
+  return app
 })
 
-app.listen(app.get('port'), function () {
-  console.log(`Node app is running at localhost: ${app.get('port')}`)
-})
+start().catch((err) => setTimeout(() => { throw err }))

@@ -32,8 +32,9 @@ echo "Looking for dstruct:$TAG"
 docker images | grep dstruct | grep $TAG
 if [ $? -eq 0 ]; then
   echo "Dstruct image found"
-  if [ $BUILD ]; then
+  if [ $BUILD -ne "false"]; then
     echo "Rebuilding image"
+    echo "If you dont want to rebuild, export BUILD_ALWAYS=false"
     builder
     makeClean
     return 0
