@@ -6,10 +6,10 @@ const mount = require('koa-mount')
 const logger = require('koa-logger')
 
 const config = require('./config/config')
-const db = require('./dal/db.js')
+const db = require('./dal/db')
 
-const apiServer = require('./api/api.js')
-const clientServer = require('./client/client.js')
+const apiServer = require('./api/api')
+const clientServer = require('./client/client')
 
 const start = co.wrap(function * start () {
   const app = koa()
