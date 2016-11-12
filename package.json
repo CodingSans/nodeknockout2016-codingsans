@@ -1,7 +1,7 @@
 {
-  "name": "nko2016-sample",
+  "name": "nko2016-codingsans",
   "version": "0.0.1",
-  "description": "A barebones Node.js app using Express 4",
+  "description": "CodingSans NodeKnockout",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
@@ -10,21 +10,22 @@
     "express": "^4.13.3"
   },
   "engines": {
-    "node": "4.4.5"
+    "node": ">=6 <7",
+    "npm": ">=3.10"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/rumblex-community/nodeknockout-2016-starter"
   },
   "keywords": [
-    "node",
-    "heroku",
-    "express"
+    "node"
   ],
-  "author": "Mark Pundsack",
+  "author": "Coding Sans",
   "contributors": [
-    "Zeke Sikelianos <zeke@sikelianos.com> (http://zeke.sikelianos.com)",
-    "Jacques Crocker <jacques@nodeknockout.com> (https://www.nodeknockout.com)"
+    "Imre 'Rover' Racz <rover@ustream.tv> (https://www.linkedin.com/in/imre-racz-a48a3095)",
+    "Gabor 'LaTotty' Toth <latotty@codingsans.com> (https://www.codingsans.com)",
+    "Akos Szokodi <akos@codingsans.com>",
+    "Laszlo 'Lacka' Csele <lacka@codingsans.com> (https://hu.linkedin.com/in/lászló-csele-008754a5)"
   ],
   "license": "MIT"
 }
