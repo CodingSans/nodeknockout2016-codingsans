@@ -13,8 +13,4 @@ RUN apk add --update bash && rm -rf /var/cache/apk/*
 IMPORT /app/ /server
 EXPOSE 5000
 CMD ["node", "/server/app/app.js"]
-{{ if .NODE_ENV }}
-  TAG dstruct:{{ .NODE_ENV }}
-{{ else }}
-  TAG dstruct:development
-{{ end }}
+TAG dstruct:{{ or .Env.NODE_ENV "develop" }}

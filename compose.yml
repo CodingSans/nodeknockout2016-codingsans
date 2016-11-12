@@ -1,16 +1,15 @@
-version: '2'
-
-services:
+namespace: application
+containers:
   mongodb:
     image: mongo:latest
     ports:
       - "27017:27017"
 
   application:
-    depends_on:
+    wait_for:
       - mongodb
     links:
-      - "mongodb:mongodb"
-    image: dstruct:development
+      - mongodb
+    image: dstruct:{{ or .Env.NODE_ENV "develop" }}
     ports:
       - "8080:5000"

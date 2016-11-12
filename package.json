@@ -5,6 +5,8 @@
   "main": "app/app.js",
   "scripts": {
     "start": "node app/app.js",
+    "compose": "./scripts/compose.sh",
+    "rocker": "rocker build .",
     "lint": "standard"
   },
   "dependencies": {
