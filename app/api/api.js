@@ -20,8 +20,8 @@ function * init () {
     v2: v2Route.route()
   }
 
-  app.use(mount('/v1', routes.v1))
-  app.use(mount('/v2', routes.v2))
+  app.use(mount('/v1', routes.v1.middleware()))
+  app.use(mount('/v2', routes.v2.middleware()))
 
   return app
 }

@@ -1,51 +1,51 @@
-'use strict';
+'use strict'
 
-const path = require('path');
+const path = require('path')
 
-const koa = require('koa');
-const serve = require('koa-static');
-const historyApiFallback = require('koa-connect-history-api-fallback');
+const koa = require('koa')
+const serve = require('koa-static')
+const historyApiFallback = require('koa-connect-history-api-fallback')
 
-const config = require('../config/config');
+const config = require('../config/config')
 
-function * init() {
+function * init () {
   if (config.client.prebuilded) {
-    return yield initProd();
+    return yield initProd()
   }
-  return yield initDev();
+  return yield initDev()
 }
 
-function * initDev() {
-  const app = koa();
+function * initDev () {
+  const app = koa()
 
   app.use(historyApiFallback({
-    verbose: false,
-  }));
+    verbose: false
+  }))
 
-  const webpack = require('webpack');
-  const webpackConfig = require('./webpack.config.js').dev();
-  const webpackDev = require('koa-webpack-dev-middleware');
+  const webpack = require('webpack')
+  const webpackConfig = require('./webpack.config.js').dev()
+  const webpackDev = require('koa-webpack-dev-middleware')
 
-  const compiler = webpack(webpackConfig);
+  const compiler = webpack(webpackConfig)
   app.use(webpackDev(compiler, {
     noInfo: true,
-    publicPath: webpackConfig.output.publicPath,
-  }));
+    publicPath: webpackConfig.output.publicPath
+  }))
 
-  return app;
+  return app
 }
 
-function * initProd() {
-  const app = koa();
+function * initProd () {
+  const app = koa()
 
   app.use(historyApiFallback({
-    verbose: false,
-  }));
+    verbose: false
+  }))
 
   // last serve assets
-  app.use(serve(path.join(__dirname, '/build')));
+  app.use(serve(path.join(__dirname, '/build')))
 
-  return app;
+  return app
 }
 
-module.exports.init = init;
+module.exports.init = init
