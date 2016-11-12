@@ -1,37 +1,36 @@
-'use strict';
+'use strict'
 
-const co = require('co');
-const koa = require('koa');
-const mount = require('koa-mount');
-const logger = require('koa-logger');
+const co = require('co')
+const koa = require('koa')
+const mount = require('koa-mount')
+const logger = require('koa-logger')
 
-const config = require('./config/config');
+const config = require('./config/config')
 
-const apiServer = require('./api/api.js');
-const clientServer = require('./client/client.js');
+const apiServer = require('./api/api.js')
+const clientServer = require('./client/client.js')
 
-const start = co.wrap(function * start() {
-  const app = koa();
+const start = co.wrap(function * start () {
+  const app = koa()
 
-  app.use(logger());
-  app.keys = [config.session.key];
+  app.use(logger())
 
   const { apiApp, clientApp } = yield {
     clientApp: clientServer.init(),
-    apiApp: apiServer.init(),
-  };
+    apiApp: apiServer.init()
+  }
 
-  app.use(mount('/api', apiApp));
-  app.use(mount('/', clientApp));
+  app.use(mount('/api', apiApp))
+  app.use(mount('/', clientApp))
 
   yield new Promise((resolve) => {
     app.listen(config.server.port, '0.0.0.0', () => {
-      console.log(`Listening on 0.0.0.0:${config.server.port}`);
-      return resolve();
-    });
-  });
+      console.log(`Listening on 0.0.0.0:${config.server.port}`)
+      return resolve()
+    })
+  })
 
-  return app;
-});
+  return app
+})
 
-start().catch((err) => setTimeout(() => { throw err; }));
+start().catch((err) => setTimeout(() => { throw err }))
