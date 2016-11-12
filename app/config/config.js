@@ -60,6 +60,23 @@ const conf = convict({
         env: 'LOGGING_CONSOLE_LEVEL'
       }
     },
+    rollbar: {
+      enabled: {
+        format: Boolean,
+        default: false,
+        env: 'LOGGING_ROLLBAR_ENABLE'
+      },
+      level: {
+        format: String,
+        default: 'warn',
+        env: 'LOGGING_ROLLBAR_LEVEL'
+      },
+      token: {
+        format: String,
+        default: '',
+        env: 'LOGGING_ROLLBAR_TOKEN'
+      }
+    },
     syslog: {
       enabled: {
         format: Boolean,

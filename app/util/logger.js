@@ -26,6 +26,23 @@ if (config.logging.syslog.enabled) {
   })
 }
 
+if (config.logging.rollbar.enabled) {
+  const rollbar = require('rollbar')
+  const bunyanRollbar = require('bunyan-rollbar')
+
+  rollbar.handleUncaughtExceptionsAndRejections(config.logging.rollbar.token, {
+    exitOnUncaughtException: true
+  })
+
+  streams.push({
+    level: config.logging.rollbar.level,
+    type: 'raw',
+    stream: new bunyanRollbar.Stream({
+      rollbarToken: config.logging.rollbar.token
+    })
+  })
+}
+
 const logger = bunyan.createLogger({
   name: 'codingsans.dstruct',
   serializers: bunyan.stdSerializers,

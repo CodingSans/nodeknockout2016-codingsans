@@ -30,11 +30,11 @@ const start = co.wrap(function * start () {
 
   yield db.start()
 
-  console.log('MongoDB connection estabilished.')
+  koaLogger.info('MongoDB connection estabilished.')
 
   yield new Promise((resolve) => {
     app.listen(config.server.port, '0.0.0.0', () => {
-      console.log(`Listening on 0.0.0.0:${config.server.port}`)
+      koaLogger.info(`Listening on 0.0.0.0:${config.server.port}`)
       return resolve()
     })
   })

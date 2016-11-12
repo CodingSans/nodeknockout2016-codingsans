@@ -10,6 +10,7 @@
   "dependencies": {
     "boom": "^4.2.0",
     "bunyan": "^1.8.4",
+    "bunyan-rollbar": "^0.1.0",
     "bunyan-syslog": "https://github.com/o20ne/node-bunyan-syslog.git#8279b07eabaaebfc81a1c8cc2af11b049d6fe859",
     "co": "^4.6.0",
     "convict": "^1.5.0",
@@ -23,7 +24,8 @@
     "koa-router": "^5.4.0",
     "koa-static": "^2.0.0",
     "lodash": "^4.16.6",
-    "mongoose": "^4.6.7"
+    "mongoose": "^4.6.7",
+    "rollbar": "^0.6.2"
   },
   "devDependencies": {
     "@angular/common": "2.1.1",
