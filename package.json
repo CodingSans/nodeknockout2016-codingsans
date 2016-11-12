@@ -4,7 +4,8 @@
   "description": "CodingSans NodeKnockout",
   "main": "app/app.js",
   "scripts": {
-    "start": "node app/app.js"
+    "start": "node app/app.js",
+    "lint": "./node_modules/.bin/standard"
   },
   "dependencies": {
     "convict": "^1.5.0",
@@ -29,5 +30,13 @@
     "Akos Szokodi <akos@codingsans.com>",
     "Laszlo 'Lacka' Csele <lacka@codingsans.com> (https://hu.linkedin.com/in/lászló-csele-008754a5)"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "standard": "^8.5.0"
+  },
+  "standard": {
+    "ignore": [
+      "app/client/**"
+    ]
+  }
 }
