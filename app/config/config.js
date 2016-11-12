@@ -1,17 +1,17 @@
-'use strict';
+'use strict'
 
-const path = require('path');
-const convict = require('convict');
-const dotenv = require('dotenv');
+const path = require('path')
+const convict = require('convict')
+const dotenv = require('dotenv')
+
+dotenv.config({
+  silent: true
+})
 
 dotenv.config({
   silent: true,
-});
-
-dotenv.config({
-  silent: true,
-  path: `.env.${process.env.NODE_ENV || 'develop'}`,
-});
+  path: `.env.${process.env.NODE_ENV || 'develop'}`
+})
 
 const conf = convict({
   env: {
@@ -19,31 +19,31 @@ const conf = convict({
     format: ['production', 'develop', 'test'],
     default: 'develop',
     env: 'NODE_ENV',
-    arg: 'env',
+    arg: 'env'
   },
   server: {
     port: {
       format: 'port',
       default: 3000,
-      env: 'PORT',
-    },
+      env: 'PORT'
+    }
   },
   mongoose: {
     connectionString: {
       format: String,
       default: 'mongodb://localhost:27017/',
-      env: 'MONGO_CONNECTION_STRING',
-    },
-  },
-});
+      env: 'MONGO_CONNECTION_STRING'
+    }
+  }
+})
 
 // Load environment dependent configuration
-const env = conf.get('env');
-conf.loadFile(path.normalize(`${__dirname}/${env}.json`));
+const env = conf.get('env')
+conf.loadFile(path.normalize(`${__dirname}/${env}.json`))
 
 // Perform validation
 conf.validate({
-  strict: true,
-});
+  strict: true
+})
 
-module.exports = conf.getProperties();
+module.exports = conf.getProperties()
