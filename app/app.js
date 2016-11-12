@@ -1,7 +1,9 @@
-var express = require('express')
+const express = require('express')
+const config = require('./config/config.js')
+
 var app = express()
 
-app.set('port', (process.env.PORT || 5000))
+app.set('port', config.server.port)
 
 app.get('/', function(request, response) {
   response.send('Hello from Node Knockout 2016 CodingSans!')
