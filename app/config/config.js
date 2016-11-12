@@ -15,11 +15,9 @@ dotenv.config({
 
 const conf = convict({
   env: {
-    doc: 'The applicaton environment.',
     format: ['production', 'develop', 'test'],
     default: 'develop',
-    env: 'NODE_ENV',
-    arg: 'env'
+    env: 'NODE_ENV'
   },
   server: {
     port: {
@@ -39,16 +37,57 @@ const conf = convict({
     prebuilded: {
       format: Boolean,
       default: false,
-      env: 'CLIENT_PREBUILDED',
+      env: 'CLIENT_PREBUILDED'
     },
     included: {
       debug: {
         format: Boolean,
         default: false,
-        env: 'CLIENT_DEBUG',
-      },
-    },
+        env: 'CLIENT_DEBUG'
+      }
+    }
   },
+  logging: {
+    console: {
+      enabled: {
+        format: Boolean,
+        default: false,
+        env: 'LOGGING_CONSOLE_ENABLE'
+      },
+      level: {
+        format: String,
+        default: 'debug',
+        env: 'LOGGING_CONSOLE_LEVEL'
+      }
+    },
+    syslog: {
+      enabled: {
+        format: Boolean,
+        default: false,
+        env: 'LOGGING_SYSLOG_ENABLE'
+      },
+      level: {
+        format: String,
+        default: 'info',
+        env: 'LOGGING_SYSLOG_LEVEL'
+      },
+      type: {
+        format: ['sys', 'tcp', 'udp'],
+        default: 'udp',
+        env: 'LOGGING_SYSLOG_TYPE'
+      },
+      host: {
+        format: String,
+        default: '127.0.0.1',
+        env: 'LOGGING_SYSLOG_HOST'
+      },
+      port: {
+        format: 'port',
+        default: 514,
+        env: 'LOGGING_SYSLOG_PORT'
+      }
+    }
+  }
 })
 
 // Load environment dependent configuration
