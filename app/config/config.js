@@ -28,7 +28,7 @@ const conf = convict({
       env: 'PORT'
     }
   },
-  mongoose: {
+  mongo: {
     connectionString: {
       format: String,
       default: 'mongodb://localhost:27017/',
