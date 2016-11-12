@@ -3,8 +3,11 @@
 const Mongoose = require('mongoose')
 
 const config = require('../config/config')
+const { baseOptionsPlugin } = require('../util/database/mongooseBaseOptions')
 
 Mongoose.Promise = Promise
+
+Mongoose.plugin(baseOptionsPlugin)
 
 const mongoose = Mongoose.createConnection()
 
