@@ -14,8 +14,13 @@
     <span class="mdl-layout-title">Dstruct</span>
     <md-list>
       <md-list-item *ngFor="let channel of channels">
-        <img md-list-avatar [src]="channel.icon">
-        <h3 md-line> {{ channel.name }} </h3>
+        <a md-list-avatar *ngIf="currentChannel.name !== channel.name" [routerLink]="['/wall', channel.name]"><img md-list-avatar [src]="channel.icon"></a>
+        <h3 md-line *ngIf="currentChannel.name !== channel.name"><a class="no-underline" [routerLink]="['/wall', channel.name]">{{ channel.name }}</a></h3>
+       
+        <img md-list-avatar *ngIf="currentChannel.name === channel.name" [src]="channel.icon">
+        <h3 md-line *ngIf="currentChannel.name === channel.name"><b>{{ channel.name }}</b></h3>
+
+        <i class="material-icons">info_outline</i>
       </md-list-item>
     </md-list>
   </div>

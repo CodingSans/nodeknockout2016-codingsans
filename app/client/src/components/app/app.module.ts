@@ -14,6 +14,7 @@ import { WallComponent } from '../wall/wall.component';
     RouterModule.forRoot([
       { path: 'login', component: LoginComponent },
       { path: 'wall', component: WallComponent },
+      { path: 'wall/:name', component: WallComponent },
       { path: '**', component: LoginComponent }
     ]),
   ],
