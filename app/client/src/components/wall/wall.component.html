@@ -1,0 +1,35 @@
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header
+            mdl-layout--fixed-tabs">
+  <header class="mdl-layout__header">
+    <div class="mdl-layout__header-row">
+      <img class="current-channel-icon" [src]="currentChannel.icon">
+      <span class="mdl-layout-title">{{ currentChannel.name }} wall</span>
+    </div>
+    <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
+      <a href="#fixed-tab-1" class="mdl-layout__tab is-active">Chat</a>
+      <a href="#fixed-tab-2" class="mdl-layout__tab">Map</a>
+    </div>
+  </header>
+  <div class="mdl-layout__drawer">
+    <span class="mdl-layout-title">Dstruct</span>
+    <md-list>
+      <md-list-item *ngFor="let channel of channels">
+        <a md-list-avatar *ngIf="currentChannel.name !== channel.name" [routerLink]="['/wall', channel.name]"><img md-list-avatar [src]="channel.icon"></a>
+        <h3 md-line *ngIf="currentChannel.name !== channel.name"><a class="no-underline" [routerLink]="['/wall', channel.name]">{{ channel.name }}</a></h3>
+       
+        <img md-list-avatar *ngIf="currentChannel.name === channel.name" [src]="channel.icon">
+        <h3 md-line *ngIf="currentChannel.name === channel.name"><b>{{ channel.name }}</b></h3>
+
+        <i class="material-icons">info_outline</i>
+      </md-list-item>
+    </md-list>
+  </div>
+  <main class="mdl-layout__content">
+    <section class="mdl-layout__tab-panel is-active" id="fixed-tab-1">
+      <div class="page-content">It's a chat</div>
+    </section>
+    <section class="mdl-layout__tab-panel" id="fixed-tab-2">
+      <div class="page-content">It's a map</div>
+    </section>
+  </main>
+</div>

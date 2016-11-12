@@ -4,5 +4,4 @@ import { Component } from '@angular/core';
   selector: 'ds-app',
   templateUrl: './app.component.html',
 })
-
 export class AppComponent { }
