@@ -24,17 +24,13 @@ function * route () {
     this.body = yield ChannelService.getPublicChannels(query, limit, skip)
   })
 
-  router.get('/:channelId', function * () {
-    const channelId = this.params.channelId
+  router.get('/:channelName', function * () {
+    const channelName = this.params.channelName
 
     this.status = 200
     this.body = {
       count: 1,
-      data: [
-        {
-          content: `info about channel #${channelId}`
-        }
-      ]
+      data: yield ChannelService.getChannelByName(channelName)
     }
   })
 
