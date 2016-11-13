@@ -5,3 +5,4 @@ yarn-error.log
 .env.production
 .env.test
 .vscode/**
+app/client/build
