@@ -5,16 +5,7 @@ import * as Identicon from 'identicon.js';
 import * as moment from 'moment';
 import * as md5 from 'blueimp-md5';
 
-import { Channel, ChannelService } from '../wall/wall.service';
-
-interface Message {
-  senderId: string;
-  senderName: string;
-  updatedAt?: Date;
-  when?: Date | string;
-  content: string;
-  icon?: string;
-}
+import { Channel, ChannelService, Message } from '../wall/wall.service';
 
 @Component({
   selector: 'ds-chat',
@@ -78,11 +69,35 @@ export class ChatComponent implements OnInit {
   }
 
   send(messageInput) {
-    const message = messageInput.value;
-    messageInput.value = '';
-    const expiry = new Date(new Date().getTime() + this.dstructTime * 1000);
-    this.channelService.postMessageToChannel(this.channelName, message, expiry).subscribe((message) => {
-      this.messages.push(this.formatMessage(message.data[0]));
+    this.getLocation().then((position) => {
+      debugger;
+      const message = messageInput.value;
+      messageInput.value = '';
+      const expiry = new Date(new Date().getTime() + this.dstructTime * 1000);
+      this.channelService.postMessageToChannel(this.channelName, message, expiry, position).subscribe((message) => {
+        this.messages.push(this.formatMessage(message.data[0]));
+      });
+    }).catch(() => {
+      debugger;
+      const message = messageInput.value;
+      messageInput.value = '';
+      const expiry = new Date(new Date().getTime() + this.dstructTime * 1000);
+      this.channelService.postMessageToChannel(this.channelName, message, expiry).subscribe((message) => {
+        this.messages.push(this.formatMessage(message.data[0]));
+      });
+    })
+  }
+
+  getLocation() {
+    var timeoutVal = 10 * 1000 * 1000;
+    return new Promise((resolve, reject) => {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition((position) => {
+          resolve(position.coords);
+        }, reject, { enableHighAccuracy: true, timeout: timeoutVal, maximumAge: 0 });
+      } else {
+        reject();
+      }
     });
   }
 }

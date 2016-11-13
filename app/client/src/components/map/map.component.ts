@@ -1,4 +1,7 @@
-import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
+import { Component, ViewChild, ElementRef, OnInit, Inject } from '@angular/core';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Channel, ChannelService, Message } from '../wall/wall.service';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'ds-map',
@@ -7,17 +10,38 @@ import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
 })
 export class MapComponent implements OnInit {
   @ViewChild('mapElement') mapElement: ElementRef;
+  private messages: Message[];
+  private channelName: string;
+
+  constructor(
+    @Inject(ChannelService) private channelService: ChannelService,
+    @Inject(ActivatedRoute) private route: ActivatedRoute,
+    @Inject(Router) private router: Router
+  ) {}
 
   ngOnInit() {
-    debugger;
-    var hungary = {lat: 47.497832, lng: 19.045497};
-    var map = new google.maps.Map(this.mapElement.nativeElement, {
+    this.map = new google.maps.Map(this.mapElement.nativeElement, {
       zoom: 4,
-      center: hungary
+      center: { lat: 0, lng: 0 },
     });
-    var marker = new google.maps.Marker({
-      position: hungary,
-      map: map
-    });
+
+    this.router.routerState.parent(this.route)
+      .params.subscribe(params => {
+        if (params.name) {
+          this.channelName = params.name;
+          this.channelService.getMessagesForChannel(this.channelName).subscribe(ret => {
+            this.messages = _.map(ret.data, (message: Message) => {
+              if (message.latitude && message.longitude) {
+                message.position = { lat: message.latitude, lng: message.longitude };
+                message.marker = new google.maps.Marker({
+                  position: message.position,
+                  map: this.map,
+                });
+              }
+              return message;
+            });
+          });
+        }
+      });
   }
 }
