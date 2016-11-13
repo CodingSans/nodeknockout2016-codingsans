@@ -10,12 +10,12 @@ describe('Test channel dao', () => {
     yield clearAllDb()
   })
 
-  it('it should be empty', function * () {
+  it('should be empty', function * () {
     const channels = yield ChannelDao.getPublicChannels()
     assert.equal(channels.length, 0)
   })
 
-  it('it should have zero channel', function * () {
+  it('should have zero channel', function * () {
     const channel = {
       name: 'private 1',
       public: false
@@ -25,7 +25,7 @@ describe('Test channel dao', () => {
     assert.equal(channels.length, 0)
   })
 
-  it('it should have one channel', function * () {
+  it('should have one channel', function * () {
     const channel = {
       name: 'public 1',
       public: true

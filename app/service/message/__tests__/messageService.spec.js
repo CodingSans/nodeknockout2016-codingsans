@@ -12,13 +12,13 @@ describe('Test message service', () => {
     yield clearAllDb()
   })
 
-  it('it should be empty', function * () {
+  it('should be empty', function * () {
     const messages = yield MessageService.getMessagesForChannelByName('')
     assert.equal(messages.count, 0)
     assert.equal(messages.data.length, 0)
   })
 
-  it('it should have one channel with one message', function * () {
+  it('should have one channel with one message', function * () {
     const message = {
       channel: 'message_test',
       content: 'content 1',
@@ -34,7 +34,7 @@ describe('Test message service', () => {
     assert.equal(channels.data.length, 1)
   })
 
-  it('it should remove a message message', function * () {
+  it('should remove a message message', function * () {
     const channels = yield ChannelService.getPublicChannels()
     const channelName = channels.data[0].name
     const messages = yield MessageService.getMessagesForChannelByName(channelName)

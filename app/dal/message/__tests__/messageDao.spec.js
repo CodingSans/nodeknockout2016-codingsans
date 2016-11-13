@@ -10,12 +10,12 @@ describe('Test message dao', () => {
     yield clearAllDb()
   })
 
-  it('it should be empty', function * () {
+  it('should be empty', function * () {
     const messages = yield MessageDao.getMessagesForChannelByName('not_existing_channel')
     assert.equal(messages.length, 0)
   })
 
-  it('it should have one message', function * () {
+  it('should have one message', function * () {
     const message = {
       channel: 'channel_1',
       content: 'message_1',
@@ -28,7 +28,7 @@ describe('Test message dao', () => {
     assert.equal(messages.length, 1)
   })
 
-  it('it should have one message', function * () {
+  it('should have one message', function * () {
     const message = {
       channel: 'channel_1',
       content: 'message_1',
