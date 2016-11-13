@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import * as _ from 'lodash';
 import * as Identicon from 'identicon.js';
@@ -19,6 +19,7 @@ interface ChannelParams {
   styleUrls: ['./wall.component.css']
 })
 export class WallComponent implements OnInit {
+  @ViewChild('sideMenu') sideMenu: ElementRef; 
   private currentChannel: Channel = {};
   private channels: Channel[] = [{
     id: '1',
@@ -57,5 +58,13 @@ export class WallComponent implements OnInit {
         return this.router.navigate(['/wall', this.channels[0].name]);
       }
     });
+  }
+
+  closeSideMenu() {
+    this.sideMenu.nativeElement.className = 'mdl-layout__drawer';
+    const element = document.getElementsByClassName('mdl-layout__obfuscator')[0];
+    if (element.classList.contains('is-visible')) {
+      element.classList.remove('is-visible');
+    }
   }
 }
