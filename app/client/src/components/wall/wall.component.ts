@@ -2,6 +2,7 @@ import { Component, OnInit, Inject, ViewChild, ElementRef } from '@angular/core'
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import * as _ from 'lodash';
 import * as Identicon from 'identicon.js';
+import * as md5 from 'blueimp-md5';
 
 interface Channel {
   id?: string;
@@ -36,9 +37,9 @@ export class WallComponent implements OnInit {
     @Inject(ActivatedRoute) private route: ActivatedRoute,
     @Inject(Router) private router: Router
   ) {
-    // TODO add MD5, close navi on menu click
     _.forEach(this.channels, (channel: Channel) => {
-      const data = new Identicon().toString();
+      const hash = md5(channel.name);
+      const data = new Identicon(hash).toString();
       channel.icon = `data:image/png;base64,${data}`;
     });
   }
