@@ -6,8 +6,12 @@
       <span class="mdl-layout-title">{{ currentChannel.name }} wall</span>
     </div>
     <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
-      <a href="#fixed-tab-1" class="mdl-layout__tab is-active">Chat</a>
-      <a href="#fixed-tab-2" class="mdl-layout__tab">Map</a>
+      <a [routerLink]="['/wall', currentChannel.name, 'chat']"
+          routerLinkActive="is-active"
+          class="mdl-layout__tab">Chat</a>
+      <a [routerLink]="['/wall', currentChannel.name, 'map']"
+          routerLinkActive="is-active"
+          class="mdl-layout__tab">Map</a>
     </div>
   </header>
   <div class="mdl-layout__drawer" #sideMenu>
@@ -15,12 +19,13 @@
     <md-list>
       <md-list-item *ngFor="let channel of channels">
         <a md-list-avatar *ngIf="currentChannel.name !== channel.name"
-            [routerLink]="['/wall', channel.name]" (click)="closeSideMenu()">
+            [routerLink]="['/wall', channel.name, 'chat']"
+            (click)="closeSideMenu()">
           <img md-list-avatar [src]="channel.icon">
         </a>
         <h3 md-line *ngIf="currentChannel.name !== channel.name">
           <a class="no-underline"
-              [routerLink]="['/wall', channel.name]" (click)="closeSideMenu()">
+              [routerLink]="['/wall', channel.name, 'chat']" (click)="closeSideMenu()">
             {{ channel.name }}
           </a>
         </h3>
@@ -35,15 +40,6 @@
     </md-list>
   </div>
   <main class="mdl-layout__content">
-    <section class="mdl-layout__tab-panel is-active" id="fixed-tab-1">
-      <div class="page-content">
-        <ds-chat [channel]="currentChannel" [messages]="messages"></ds-chat>
-      </div>
-    </section>
-    <section class="mdl-layout__tab-panel" id="fixed-tab-2">
-      <div class="page-content">
-        <ds-map></ds-map>
-      </div>
-    </section>
+    <router-outlet></router-outlet>
   </main>
 </div>

@@ -16,7 +16,8 @@ interface Message {
 @Component({
   selector: 'ds-chat',
   templateUrl: './chat.component.html',
-  styleUrls: ['./chat.component.css']
+  styleUrls: ['./chat.component.css'],
+  providers: [ChannelService],
 })
 export class ChatComponent {
   @Input() channel: Channel;

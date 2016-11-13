@@ -522,7 +522,7 @@ bunyan-rollbar@^0.1.0:
   resolved "https://github.com/o20ne/node-bunyan-syslog.git#8279b07eabaaebfc81a1c8cc2af11b049d6fe859"
   dependencies:
     assert-plus "0.1.5"
-    nan "2.1.x"
+    nan "2.4.0"
 
 bunyan@^1.8.4:
   version "1.8.4"

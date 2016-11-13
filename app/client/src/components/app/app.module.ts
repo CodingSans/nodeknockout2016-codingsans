@@ -15,8 +15,20 @@ import { MapComponent } from '../map/map.component';
     MaterialModule.forRoot(),
     RouterModule.forRoot([
       { path: 'login', component: LoginComponent },
-      { path: 'wall', component: WallComponent },
-      { path: 'wall/:name', component: WallComponent },
+      // { path: 'wall', component: WallComponent },
+      { 
+        path: 'wall/:name',
+        component: WallComponent,
+        children: [
+          {
+            path: 'chat',
+            component: ChatComponent
+          }, {
+            path: 'map',
+            component: MapComponent
+          }
+        ]
+      },
       { path: '**', component: LoginComponent }
     ]),
   ],

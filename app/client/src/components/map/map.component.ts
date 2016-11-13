@@ -9,6 +9,7 @@ export class MapComponent implements OnInit {
   @ViewChild('mapElement') mapElement: ElementRef;
 
   ngOnInit() {
+    debugger;
     var hungary = {lat: 47.497832, lng: 19.045497};
     var map = new google.maps.Map(this.mapElement.nativeElement, {
       zoom: 4,
