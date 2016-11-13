@@ -64,7 +64,8 @@ module.exports.dev = () => ({
       title: 'Dstruct',
       maps_api: config.client.mapsApi,
       template: path.join(__dirname, '../src/indexTemplate.ejs'),
-      inject: 'body'
+      inject: 'body',
+      favicon: path.join(__dirname, '../public/favicon.ico')
     })
   ]
 })
