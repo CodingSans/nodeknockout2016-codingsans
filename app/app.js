@@ -2,7 +2,9 @@
 
 const co = require('co')
 const koa = require('koa')
+const _ = require('lodash')
 const mount = require('koa-mount')
+const session = require('koa-session')
 const koaBunyanLogger = require('koa-bunyan-logger')
 
 const config = require('./config/config')
@@ -18,7 +20,20 @@ const start = co.wrap(function * start () {
   const koaLogger = logger.child()
 
   app.use(koaBunyanLogger(koaLogger))
-  app.use(koaBunyanLogger.requestLogger())
+  app.use(koaBunyanLogger.requestLogger({
+    updateLogFields: function (fields) {
+      fields.userid = _.get(this, 'session.oauth.userid')
+    }
+  }))
+
+  app.keys = [config.sessionKey]
+  app.use(session({
+    key: 'dstruct:sess',
+    maxAge: 86400000,
+    overwrite: true,
+    httpOnly: true,
+    signed: true
+  }, app))
 
   const routes = yield {
     api: apiServer.init(),

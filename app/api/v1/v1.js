@@ -1,11 +1,20 @@
 'use strict'
 
-const koaRouter = require('koa-router')
+const koa = require('koa')
+const mount = require('koa-mount')
 
-function * route () {
-  const router = koaRouter()
+const oauthRoute = require('./oauth/oauth')
 
-  return router
+function * init () {
+  const app = koa()
+
+  const routes = yield {
+    oauth: oauthRoute.init()
+  }
+
+  app.use(mount('/oauth', routes.oauth))
+
+  return app
 }
 
-module.exports.route = route
+module.exports.init = init
