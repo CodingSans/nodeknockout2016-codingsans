@@ -31,4 +31,12 @@ export class ChannelService {
       .map((res:Response) => res.json())
       .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
   }
+
+  postMessageToChannel(channelName: string, message: string) {
+    return this.http.post(`/api/v2/channel/${channelName}/message`, {
+      content: message,
+    })
+    .map((res:Response) => res.json())
+    .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
+  }
 }

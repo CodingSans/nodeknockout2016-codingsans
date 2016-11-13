@@ -13,6 +13,8 @@
     </ul>
   </div>
   <div class="bottom full-width">
-    <md-input class="full-width message-box" placeholder="Type message."></md-input>
+    <md-input class="full-width message-box"
+      placeholder="Type message."
+      (keyup)="onKeyEvent($event)"></md-input>
   </div>
 </div>
