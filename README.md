@@ -58,6 +58,9 @@ The support team on Slack was pretty quick in spite of the fact that everyone wa
 ## Team members
 
 [Akos Szokodi](https://www.linkedin.com/in/ákos-szokodi-14101486) - Frontend and Backend
+
 [Laszlo 'Lacka' Csele](https://www.linkedin.com/in/lászló-csele-008754a5) - Frontend and Backend
+
 [Gabor 'LaTotty' Toth](https://www.linkedin.com/in/latotty) - Backend and third party services
+
 [Imre 'Rover' Racz](https://www.linkedin.com/in/imre-racz-a48a3095) - DevOps and third party services
