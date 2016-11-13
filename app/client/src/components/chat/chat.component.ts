@@ -57,6 +57,8 @@ export class ChatComponent {
 
   private dstructTime;
 
+  private currentMessage;
+
   constructor() {
     this.dstructTime = 5;
 
@@ -66,5 +68,23 @@ export class ChatComponent {
       message.icon = `data:image/png;base64,${data}`;
       message.when = moment(message.when).calendar();
     });
+  }
+
+  toggleDstructTime() {
+    switch (this.dstructTime) {
+      case 5:
+        this.dstructTime = 10;
+        break;
+      case 10:
+        this.dstructTime = 30;
+        break;
+      case 30:
+        this.dstructTime = 5;
+        break;
+    }
+  }
+
+  sendMessage() {
+    console.log(`Sending ${this.currentMessage}.`);
   }
 }
