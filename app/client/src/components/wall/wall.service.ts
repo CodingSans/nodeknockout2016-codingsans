@@ -44,4 +44,10 @@ export class ChannelService {
     .map((res:Response) => res.json())
     .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
   }
+
+  addChannel(channelName) {
+    return this.http.put(`/api/v2/channel/${channelName}`, {})
+    .map((res:Response) => res.json())
+    .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
+  }
 }

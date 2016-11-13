@@ -38,8 +38,11 @@ function * route () {
     const channelName = this.params.channelName
     const body = this.request.fields
 
-    yield ChannelService.createChannel(_.assign({}, body, { name: channelName }))
-    this.status = 204
+    this.status = 201
+    this.body = {
+      count: 1,
+      data: yield ChannelService.createChannel(_.assign({}, body, { name: channelName }))
+    }
   })
 
   router.use('/:channelName/message', routes.message.routes(), routes.message.allowedMethods())
