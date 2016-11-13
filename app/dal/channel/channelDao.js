@@ -2,8 +2,9 @@
 
 const Channel = require('./channelModel').model
 
-function * getPublicChannels () {
-  return Channel.find({ public: true }).exec()
+function * getPublicChannels (query, limit, skip) {
+  return Channel.find({ public: true, name: new RegExp(query, 'i') })
+    .limit(limit).skip(skip).exec()
 }
 
 function * postChannel (channel) {
@@ -11,5 +12,10 @@ function * postChannel (channel) {
   return newChannel.save()
 }
 
+function * count (query) {
+  return Channel.count({ public: true, name: new RegExp(query, 'i') }).exec()
+}
+
 exports.getPublicChannels = getPublicChannels
 exports.postChannel = postChannel
+exports.count = count
