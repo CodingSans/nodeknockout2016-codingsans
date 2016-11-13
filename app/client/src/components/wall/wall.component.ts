@@ -13,7 +13,7 @@ import * as md5 from 'blueimp-md5';
 })
 export class WallComponent implements OnInit {
   @ViewChild('sideMenu') sideMenu: ElementRef;
-  @ViewChild('myDialog') myDialog: ElementRef;
+  @ViewChild('addChannelDialog') addChannelDialog: ElementRef;
 
   private currentChannel: Channel = {};
   private channels: Channel[] = [];
@@ -89,16 +89,29 @@ export class WallComponent implements OnInit {
     }
   }
 
+  addChannel(channelNameInput) {
+    const channelName = channelNameInput.value;
+    channelNameInput.value = '';
+    this.channelService.addChannel(channelName).subscribe((channel) => {
+      if (channel.data) {
+        let channelsExtend = _.concat<Channel>(this.channels, [{ name: channel.data.name, public: true }]);
+        channelsExtend = this.genIcons(channelsExtend);
+        this.channels = channelsExtend;
+      }
+    });
+    this.closeDialog();
+  }
+
   openDialog() {
     this.closeSideMenu();
-    if (this.myDialog.nativeElement.showModal) {
-      this.myDialog.nativeElement.showModal();
+    if (this.addChannelDialog.nativeElement.showModal) {
+      this.addChannelDialog.nativeElement.showModal();
     } else {
       console.log('Browser not supported for dialog.');
     }
   }
 
   closeDialog() {
-    this.myDialog.nativeElement.close();
+    this.addChannelDialog.nativeElement.close();
   }
 }

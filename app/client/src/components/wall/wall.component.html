@@ -52,16 +52,16 @@
   </main>
 </div>
 
-<dialog class="mdl-dialog" #myDialog>
+<dialog class="mdl-dialog" #addChannelDialog>
   <h4 class="mdl-dialog__title">Create new channel</h4>
   <div class="mdl-dialog__content">
     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-      <input class="mdl-textfield__input" type="text" id="channelName">
+      <input class="mdl-textfield__input" type="text" id="channelName" #channelNameInput>
       <label class="mdl-textfield__label" for="channelName">Channel name</label>
     </div>
   </div>
   <div class="mdl-dialog__actions">
-    <button type="button" class="mdl-button">Create</button>
+    <button type="button" class="mdl-button" (click)=addChannel(channelNameInput)>Create</button>
     <button type="button" class="mdl-button close" (click)="closeDialog()">Cancel</button>
   </div>
 </dialog>
