@@ -22,7 +22,7 @@ export class MapComponent implements OnInit {
   ngOnInit() {
     this.map = new google.maps.Map(this.mapElement.nativeElement, {
       zoom: 4,
-      center: { lat: 0, lng: 0 },
+      center: { lat: 47.5, lng: 19 },
     });
 
     this.router.routerState.parent(this.route)
@@ -30,9 +30,11 @@ export class MapComponent implements OnInit {
         if (params.name) {
           this.channelName = params.name;
           this.channelService.getMessagesForChannel(this.channelName).subscribe(ret => {
+            var bounds = new google.maps.LatLngBounds();
             this.messages = _.map(ret.data, (message: Message) => {
               if (message.latitude && message.longitude) {
                 message.position = { lat: message.latitude, lng: message.longitude };
+                bounds.extend(message.position);
                 message.marker = new google.maps.Marker({
                   position: message.position,
                   map: this.map,
@@ -40,6 +42,7 @@ export class MapComponent implements OnInit {
               }
               return message;
             });
+            this.map.fitBounds(bounds);
           });
         }
       });
