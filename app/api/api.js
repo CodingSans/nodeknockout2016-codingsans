@@ -16,12 +16,12 @@ function * init () {
   app.use(helmet())
 
   const routes = yield {
-    v1: v1Route.route(),
-    v2: v2Route.route()
+    v1: v1Route.init(),
+    v2: v2Route.init()
   }
 
-  app.use(mount('/v1', routes.v1.middleware()))
-  app.use(mount('/v2', routes.v2.middleware()))
+  app.use(mount('/v1', routes.v1))
+  app.use(mount('/v2', routes.v2))
 
   return app
 }
