@@ -11,5 +11,17 @@ function * createChannel (channel) {
   return created
 }
 
+function * getChannelByName (channelName) {
+  const channel = yield ChannelDao.getChannelByName(channelName)
+  return channel
+}
+
+function * getChannelById (channelId) {
+  const channel = yield ChannelDao.getChannelById(channelId)
+  return channel
+}
+
 exports.getPublicChannels = getPublicChannels
 exports.createChannel = createChannel
+exports.getChannelByName = getChannelByName
+exports.getChannelById = getChannelById
