@@ -15,6 +15,19 @@ function * init () {
   return yield initDev()
 }
 
+function * builder () {
+  const webpack = require('webpack')
+  const webpackConfig = require('./webpack.config.js').prod()
+  return yield new Promise((res, rej) => {
+    webpack(webpackConfig, (err, stats) => {
+      if (err) {
+        return rej(err);
+      }
+      return res(stats);
+    })
+  })
+}
+
 function * initDev () {
   const app = koa()
 
@@ -44,9 +57,11 @@ function * initProd () {
   }))
 
   // last serve assets
-  app.use(serve(path.join(__dirname, '/build')))
+  const buildPath = path.join(__dirname, '/build')
+  app.use(serve(buildPath))
 
   return app
 }
 
 module.exports.init = init
+module.exports.builder = builder
