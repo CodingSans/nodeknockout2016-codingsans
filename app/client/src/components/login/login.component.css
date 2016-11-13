@@ -6,3 +6,10 @@ main {
   font-family: 'Roboto', sans-serif;
   font-weight: 300;
 }
+
+hr {
+  padding-top: 20px;
+}
+p {
+  margin-top: 20px;
+}

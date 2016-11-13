@@ -12,7 +12,9 @@ import * as md5 from 'blueimp-md5';
   providers: [ChannelService],
 })
 export class WallComponent implements OnInit {
-  @ViewChild('sideMenu') sideMenu: ElementRef; 
+  @ViewChild('sideMenu') sideMenu: ElementRef;
+  @ViewChild('myDialog') myDialog: ElementRef;
+
   private currentChannel: Channel = {};
   private channels: Channel[] = [];
   private messages: any[] = [];
@@ -87,5 +89,18 @@ export class WallComponent implements OnInit {
     if (element.classList.contains('is-visible')) {
       element.classList.remove('is-visible');
     }
+  }
+
+  openDialog() {
+    this.closeSideMenu();
+    if (this.myDialog.nativeElement.showModal) {
+      this.myDialog.nativeElement.showModal();
+    } else {
+      console.log('Browser not supported for dialog.');
+    }
+  }
+
+  closeDialog() {
+    this.myDialog.nativeElement.close();
   }
 }

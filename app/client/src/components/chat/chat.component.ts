@@ -8,9 +8,11 @@ import * as md5 from 'blueimp-md5';
 import { Channel, ChannelService } from '../wall/wall.service';
 
 interface Message {
-  from: string;
-  when: Date | string;
-  message: string;
+  senderId: string;
+  senderName: string;
+  updatedAt?: Date;
+  when?: Date | string;
+  content: string;
   icon?: string;
 }
 
@@ -24,20 +26,14 @@ export class ChatComponent implements OnInit {
   private channel: Channel;
   private messages: Message[];
   private channelName: string;
+  private dstructTime: number = 5;
+  private currentMessage: string = '';
 
   constructor(
     @Inject(ChannelService) private channelService: ChannelService,
     @Inject(ActivatedRoute) private route: ActivatedRoute,
     @Inject(Router) private router: Router
-  ) {
-    // _.forEach(this.messages, (message: Message) => {
-    //   const hash = md5(message.from);
-    //   const data = new Identicon(hash).toString();
-    //   message.icon = `data:image/png;base64,${data}`;
-    //   message.when = moment(message.when).calendar();
-    // });
-
-  }
+  ) {}
 
   ngOnInit() {
     this.router.routerState.parent(this.route)
@@ -45,18 +41,49 @@ export class ChatComponent implements OnInit {
         if (params.name) {
           this.channelName = params.name;
           this.channelService.getMessagesForChannel(this.channelName).subscribe(ret => {
-            this.messages = ret.data;
+            this.messages = _.map(ret.data, message => {
+              return this.formatMessage(message);
+            });
           });
         }
       });
+  }
+
+  formatMessage(message) {
+    const hash = md5(message.senderId);
+    const data = new Identicon(hash).toString();
+    message.icon = `data:image/png;base64,${data}`;
+    message.when = moment(message.updatedAt).calendar();
+    return message;
   }
 
   onKeyEvent(event) {
     if (event.keyCode === 13) {
       const message = (<HTMLInputElement>event.target).value;
       this.channelService.postMessageToChannel(this.channelName, message).subscribe((message) => {
-        this.messages.push(message.data[0]);
+        this.messages.push(this.formatMessage(message.data[0]));
       });
     }
+
+  }
+  
+  toggleDstructTime() {
+    switch (this.dstructTime) {
+      case 5:
+        this.dstructTime = 10;
+        break;
+      case 10:
+        this.dstructTime = 30;
+        break;
+      case 30:
+        this.dstructTime = 5;
+        break;
+    }
+  }
+
+  sendMessage(message) {
+    this.channelService.postMessageToChannel(this.channelName, message).subscribe((message) => {
+      this.messages.push(this.formatMessage(message.data[0]));
+    });
   }
 }
