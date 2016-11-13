@@ -50,7 +50,7 @@
   version "2.0.33"
   resolved "https://registry.yarnpkg.com/@types/hammerjs/-/hammerjs-2.0.33.tgz#45f57352474181425bb4b65f7313a60426d54bab"
 
-"@types/lodash":
+"@types/lodash@^4.14.38":
   version "4.14.38"
   resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.38.tgz#fcbd51e740c5e260652cad975dd26c5c4151cb11"
 
@@ -474,6 +474,10 @@ builtin-modules@^1.0.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/builtin-modules/-/builtin-modules-1.1.1.tgz#270f076c5a72c02f5b65a47df94c5fe3a278892f"
 
+bunyan-prettystream@^0.1.3:
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/bunyan-prettystream/-/bunyan-prettystream-0.1.3.tgz#6c3b713266f6ad32007c7b6ab1e998a245349d98"
+
 bunyan-rollbar@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/bunyan-rollbar/-/bunyan-rollbar-0.1.0.tgz#3d87cbfd2f7ea52e0ca2ba8b5d0a55d82047ce55"
@@ -551,8 +555,8 @@ camelize@1.0.0:
   resolved "https://registry.yarnpkg.com/camelize/-/camelize-1.0.0.tgz#164a5483e630fa4321e5af07020e531831b2609b"
 
 caniuse-db@^1.0.30000539, caniuse-db@^1.0.30000578:
-  version "1.0.30000579"
-  resolved "https://registry.yarnpkg.com/caniuse-db/-/caniuse-db-1.0.30000579.tgz#9018ef6f0ce61977525ae69c440e538e6ffccf35"
+  version "1.0.30000580"
+  resolved "https://registry.yarnpkg.com/caniuse-db/-/caniuse-db-1.0.30000580.tgz#04bf77139486b792ca42b4ab8ef0cbec00fe4640"
 
 caseless@~0.11.0:
   version "0.11.0"
@@ -855,11 +859,11 @@ cookie@0.3.1:
   resolved "https://registry.yarnpkg.com/cookie/-/cookie-0.3.1.tgz#e7e0a1f9ef43b4c8ba925c5c5a96e806d16873bb"
 
 cookies@~0.6.1:
-  version "0.6.1"
-  resolved "https://registry.yarnpkg.com/cookies/-/cookies-0.6.1.tgz#ef693b1bc6f01f567d46e2f504e9c15fb70cba90"
+  version "0.6.2"
+  resolved "https://registry.yarnpkg.com/cookies/-/cookies-0.6.2.tgz#6ac1b052895208e8fc4c4f5f86a9ed31b9cb5ccf"
   dependencies:
     depd "~1.1.0"
-    keygrip "~1.0.0"
+    keygrip "~1.0.1"
 
 copy-webpack-plugin@^4.0.0:
   version "4.0.0"
@@ -2184,7 +2188,7 @@ icss-replace-symbols@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/icss-replace-symbols/-/icss-replace-symbols-1.0.2.tgz#cb0b6054eb3af6edc9ab1d62d01933e2d4c8bfa5"
 
-identicon.js:
+identicon.js@^1.3.0:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/identicon.js/-/identicon.js-1.3.0.tgz#7bfbb386b775e0781a955578bab71e824e6869e0"
 
@@ -2473,7 +2477,7 @@ jsesc@~0.5.0:
   version "0.5.0"
   resolved "https://registry.yarnpkg.com/jsesc/-/jsesc-0.5.0.tgz#e7dee66e35d6fc16f710fe91d5cf69f70f08911d"
 
-jshashes:
+jshashes@^1.0.5:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/jshashes/-/jshashes-1.0.5.tgz#8ba1f70fefda9f6563f5587685185e43cf2e720b"
 
@@ -2536,7 +2540,7 @@ kareem@1.1.3:
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/kareem/-/kareem-1.1.3.tgz#0877610d8879c38da62d1dbafde4e17f2692f041"
 
-keygrip@~1.0.0:
+keygrip@~1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/keygrip/-/keygrip-1.0.1.tgz#b02fa4816eef21a8c4b35ca9e52921ffc89a30e9"
 
