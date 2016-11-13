@@ -1,0 +1,45 @@
+.bottom {
+  position: fixed;
+  bottom: 0;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.time {
+  color: grey;
+  font-style: italic;
+  font-size: smaller;
+}
+
+.message-box {
+  color: grey;
+  margin-left: 15px;
+  margin-right: 15px;
+  margin-bottom: 15px;
+}
+
+.message {
+  white-space: normal;
+  color: black;
+  margin-left: 55px;
+  height: auto;
+}
+
+.user-icon {
+  object-fit: cover;
+  border-radius:50%;
+  width: 40px;
+  height: 40px;
+  margin: 5px;
+}
+
+.auto-height {
+  height: auto;
+}
+
+.mdl-list__item--three-line {
+  height: auto;
+  padding: 5px;
+}

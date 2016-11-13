@@ -1,3 +1,18 @@
 <div>
-  It's a chat
+  <div>
+    <ul class="demo-list-three mdl-list">
+      <li class="mdl-list__item mdl-list__item--three-line auto-height" *ngFor="let message of messages">
+        <span class="mdl-list__item-primary-content auto-height">
+          <img md-list-avatar class="user-icon" [src]="message.icon">
+          <span>{{ message.from }}</span> <span class="time">{{ message.when }}</span>
+          <p class="mdl-list__item-text-body message">
+            {{ message.message }}
+          </p>
+        </span>
+      </li>
+    </ul>
+  </div>
+  <div class="bottom full-width">
+    <md-input class="full-width message-box" placeholder="Type message."></md-input>
+  </div>
 </div>
