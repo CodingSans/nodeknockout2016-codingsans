@@ -18,7 +18,7 @@
       <div class="mdl-textfield mdl-js-textfield full-width">
         <textarea class="mdl-textfield__input message-input-box message-input"
           #messageInput
-          type="text" rows= "3" id="typeMessage" (keyup)="onKeyEvent($event)"></textarea>
+          type="text" rows= "3" id="typeMessage" (keyup)="onKeyEvent($event, messageInput)"></textarea>
         <label class="mdl-textfield__label message-input-box" for="typeMessage">Type message.</label>
       </div>
     </div>
@@ -27,7 +27,7 @@
         Message Dstructs in {{ dstructTime }} seconds.
       </div>
       <button id="dstructToggler" md-mini-fab class="small-margin" (click)="toggleDstructTime()">{{ dstructTime }}</button>
-      <button md-raised-button color="primary" class="small-margin" (click)="sendMessage(messageInput.value)">Send</button>
+      <button md-raised-button color="primary" class="small-margin" (click)="send(messageInput)">Send</button>
     </div>
   </div>
 </div>
