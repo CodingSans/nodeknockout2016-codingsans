@@ -11,5 +11,10 @@ function * postMessage (message) {
   return newMessage.save()
 }
 
+function * removeMessage (channelName, messageId) {
+  return Message.remove({ _id: messageId, channel: channelName }).exec()
+}
+
 exports.getMessagesForChannelByName = getMessagesForChannelByName
 exports.postMessage = postMessage
+exports.removeMessage = removeMessage
