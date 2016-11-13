@@ -60,7 +60,8 @@ export class ChatComponent implements OnInit {
   onKeyEvent(event) {
     if (event.keyCode === 13) {
       const message = (<HTMLInputElement>event.target).value;
-      this.channelService.postMessageToChannel(this.channelName, message).subscribe((message) => {
+      const expiry = new Date(new Date().getTime() + this.dstructTime * 1000);
+      this.channelService.postMessageToChannel(this.channelName, message, expiry).subscribe((message) => {
         this.messages.push(this.formatMessage(message.data[0]));
       });
     }
@@ -82,7 +83,8 @@ export class ChatComponent implements OnInit {
   }
 
   sendMessage(message) {
-    this.channelService.postMessageToChannel(this.channelName, message).subscribe((message) => {
+    const expiry = new Date(new Date().getTime() + this.dstructTime * 1000);
+    this.channelService.postMessageToChannel(this.channelName, message, expiry).subscribe((message) => {
       this.messages.push(this.formatMessage(message.data[0]));
     });
   }
