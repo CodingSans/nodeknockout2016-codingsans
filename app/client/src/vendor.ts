@@ -9,3 +9,7 @@ import '@angular/router';
 import 'rxjs';
 // identicon.js
 import 'identicon.js';
+// moment
+import 'moment';
+// md5
+import 'blueimp-md5';
