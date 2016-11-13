@@ -6,7 +6,7 @@
   margin-right: 5px;
 }
 
-.no-underline {
+.unselected-channel {
   text-decoration: none;
-  color: black;
+  color: grey;
 }

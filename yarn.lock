@@ -4531,6 +4531,10 @@ uglify-to-browserify@~1.0.0:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/uglify-to-browserify/-/uglify-to-browserify-1.0.2.tgz#6e0924d6bda6b5afe349e39a6d632850a0f882b7"
 
+ui-router-ng2:
+  version "1.0.0-beta.3"
+  resolved "https://registry.yarnpkg.com/ui-router-ng2/-/ui-router-ng2-1.0.0-beta.3.tgz#c5ad3b7079f6fe9d7f9d8a9367e28ab8b7b57857"
+
 uid-number@~0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/uid-number/-/uid-number-0.0.6.tgz#0ea10e8035e8eb5b8e4449f06da1c730663baa81"

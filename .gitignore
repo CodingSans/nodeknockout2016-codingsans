@@ -4,3 +4,4 @@ yarn-error.log
 .env.develop
 .env.production
 .env.test
+.vscode/**

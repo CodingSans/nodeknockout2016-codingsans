@@ -1,5 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Component } from '@angular/core';
 import * as _ from 'lodash';
 import * as Identicon from 'identicon.js';
 
@@ -18,7 +17,7 @@ interface ChannelParams {
   templateUrl: './wall.component.html',
   styleUrls: ['./wall.component.css']
 })
-export class WallComponent implements OnInit {
+export class WallComponent {
   private currentChannel: Channel = {};
   private channels: Channel[] = [{
     id: '1',
@@ -31,31 +30,13 @@ export class WallComponent implements OnInit {
     name: 'Burrito',
   }];
 
-  constructor(
-    @Inject(ActivatedRoute) private route: ActivatedRoute,
-    @Inject(Router) private router: Router
-  ) {
+  constructor() {
     // TODO add MD5, close navi on menu click
     _.forEach(this.channels, (channel: Channel) => {
       const data = new Identicon().toString();
       channel.icon = `data:image/png;base64,${data}`;
     });
-  }
 
-  ngOnInit() {
-    this.route.params.subscribe((params: ChannelParams) => {
-      if (params.name) {
-        const channel = _.find(this.channels, (channel: Channel) => {
-          return (params.name === channel.name);
-        });
-        if (!channel) {
-          return this.router.navigate(['/wall']);
-        }
-
-        this.currentChannel = channel;
-      } else {
-        return this.router.navigate(['/wall', this.channels[0].name]);
-      }
-    });
+    this.currentChannel = this.channels[0];
   }
 }

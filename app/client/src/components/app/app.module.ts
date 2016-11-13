@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule }  from '@angular/platform-browser';
 import { MaterialModule } from '@angular/material';
-import { RouterModule } from '@angular/router';
+import { UIRouterModule } from 'ui-router-ng2';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from '../login/login.component';
@@ -13,12 +13,13 @@ import { MapComponent } from '../map/map.component';
   imports: [
     BrowserModule,
     MaterialModule.forRoot(),
-    RouterModule.forRoot([
-      { path: 'login', component: LoginComponent },
-      { path: 'wall', component: WallComponent },
-      { path: 'wall/:name', component: WallComponent },
-      { path: '**', component: LoginComponent }
-    ]),
+    UIRouterModule.forRoot({
+      states: [
+        { name: 'login', url: '/login', component: LoginComponent },
+        { name: 'wallByName', url: '/wall/{name}', component: WallComponent },
+      ],
+      otherwise: '/login',
+    }),
   ],
   declarations: [
     AppComponent,
