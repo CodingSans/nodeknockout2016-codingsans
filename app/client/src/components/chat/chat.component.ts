@@ -17,7 +17,7 @@ export class ChatComponent implements OnInit {
   private channel: Channel;
   private messages: Message[];
   private channelName: string;
-  private dstructTime: number = 5;
+  private dstructTime: number = 30;
   private currentMessage: string = '';
 
   constructor(
