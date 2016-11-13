@@ -6,6 +6,8 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { LoginComponent } from '../login/login.component';
 import { WallComponent } from '../wall/wall.component';
+import { ChatComponent } from '../chat/chat.component';
+import { MapComponent } from '../map/map.component';
 
 @NgModule({
   imports: [
@@ -22,6 +24,8 @@ import { WallComponent } from '../wall/wall.component';
     AppComponent,
     LoginComponent,
     WallComponent,
+    ChatComponent,
+    MapComponent
   ],
   bootstrap: [ AppComponent ]
 })

@@ -45,6 +45,11 @@ const conf = convict({
         default: false,
         env: 'CLIENT_DEBUG'
       }
+    },
+    mapsApi: {
+      format: String,
+      default: '',
+      env: 'CLIENT_GMAPS_API_KEY'
     }
   },
   logging: {
