@@ -1,67 +1,83 @@
 import { Component, OnInit, Inject, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Channel, ChannelParams, ChannelService } from './wall.service';
 import * as _ from 'lodash';
 import * as Identicon from 'identicon.js';
 import * as md5 from 'blueimp-md5';
 
-interface Channel {
-  id?: string;
-  name?: string;
-  icon?: string;
-}
-
-interface ChannelParams {
-  name?: string;
-}
-
 @Component({
   selector: 'ds-wall',
   templateUrl: './wall.component.html',
-  styleUrls: ['./wall.component.css']
+  styleUrls: ['./wall.component.css'],
+  providers: [ChannelService],
 })
 export class WallComponent implements OnInit {
   @ViewChild('sideMenu') sideMenu: ElementRef;
+  @ViewChild('myDialog') myDialog: ElementRef;
 
   private currentChannel: Channel = {};
-
-  private channels: Channel[] = [{
-    id: '1',
-    name: 'Topito',
-  }, {
-    id: '2',
-    name: 'Kekito',
-  }, {
-    id: '3',
-    name: 'Burrito',
-  }];
-
-  @ViewChild('myDialog') myDialog: ElementRef;
+  private channels: Channel[] = [];
+  private messages: any[] = [];
 
   constructor(
     @Inject(ActivatedRoute) private route: ActivatedRoute,
-    @Inject(Router) private router: Router
-  ) {
-    _.forEach(this.channels, (channel: Channel) => {
-      const hash = md5(channel.name);
-      const data = new Identicon(hash).toString();
-      channel.icon = `data:image/png;base64,${data}`;
+    @Inject(Router) private router: Router,
+    @Inject(ChannelService) private channelService: ChannelService
+  ) {}
+
+  ngOnInit() {
+    this.channelService.getPublicChannels().subscribe((ret) => {
+      const channels = ret.data;
+
+      this.route.params.forEach((params: ChannelParams) => {
+        const channel = this.setupChannels(params, channels);
+
+        this.currentChannel = channel;
+        this.channelService.currentChannel = channel;
+      });
+    });
+    
+    this.route.params.subscribe((params: ChannelParams) => {
+      if (this.channels.length) {
+        if (params.name) {
+          const channel = this.setupChannels(params, this.channels);
+
+          this.currentChannel = channel;
+          this.channelService.currentChannel = channel;
+        } else {
+          return this.router.navigate(['/wall', 'general', 'chat']);
+        }
+      }
     });
   }
 
-  ngOnInit() {
-    this.route.params.subscribe((params: ChannelParams) => {
-      if (params.name) {
-        const channel = _.find(this.channels, (channel: Channel) => {
-          return (params.name === channel.name);
-        });
-        if (!channel) {
-          return this.router.navigate(['/wall']);
-        }
+  setupChannels(params, channels): any {
+    let channelsExtend: Channel[] = _.concat([{ name: 'general', public: true }], channels);
+    const channelName = params.name;
+    let channel = this.getChannel(channelsExtend, channelName);
+    if (!channel) {   
+      channelsExtend = _.concat<Channel>(channelsExtend, [{ name: channelName, public: true }]);
+    }
+    channelsExtend = this.genIcons(channelsExtend);
+    channel = this.getChannel(channelsExtend, channelName);
+    this.channels = channelsExtend;
 
-        this.currentChannel = channel;
-      } else {
-        return this.router.navigate(['/wall', this.channels[0].name]);
-      }
+    return channel;
+  }
+
+  getChannel(channels, channelName) {
+    return _.find(channels, (channel: Channel) => {
+      return (channelName === channel.name);
+    });
+  }
+
+  genIcons(channels) {
+    return _.map(channels, (channel: Channel) => {
+      const hash = md5(channel.name);
+      const data = new Identicon(hash).toString();
+      const channelObj = _.cloneDeep(channel);
+      channelObj.icon = `data:image/png;base64,${data}`;
+      return channelObj;
     });
   }
 

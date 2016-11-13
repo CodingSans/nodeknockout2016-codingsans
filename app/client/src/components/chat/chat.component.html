@@ -4,18 +4,21 @@
       <li class="mdl-list__item mdl-list__item--three-line auto-height" *ngFor="let message of messages">
         <span class="mdl-list__item-primary-content auto-height">
           <img md-list-avatar class="user-icon" [src]="message.icon">
-          <span>{{ message.from }}</span> <span class="time">{{ message.when }}</span>
+          <span>{{ message.senderName }}</span> <span class="time">{{ message.when }}</span>
           <p class="mdl-list__item-text-body message">
-            {{ message.message }}
+            {{ message.content }}
           </p>
         </span>
       </li>
     </ul>
   </div>
+
   <div class="bottom-box full-width">
     <div class="message-box">
       <div class="mdl-textfield mdl-js-textfield full-width">
-        <textarea class="mdl-textfield__input message-input-box message-input" type="text" rows= "3" id="typeMessage" ></textarea>
+        <textarea class="mdl-textfield__input message-input-box message-input"
+          #messageInput
+          type="text" rows= "3" id="typeMessage" (keyup)="onKeyEvent($event)"></textarea>
         <label class="mdl-textfield__label message-input-box" for="typeMessage">Type message.</label>
       </div>
     </div>
@@ -24,7 +27,7 @@
         Message Dstructs in {{ dstructTime }} seconds.
       </div>
       <button id="dstructToggler" md-mini-fab class="small-margin" (click)="toggleDstructTime()">{{ dstructTime }}</button>
-      <button md-raised-button color="primary" class="small-margin" (click)="sendMessage()">Send</button>
+      <button md-raised-button color="primary" class="small-margin" (click)="sendMessage(messageInput.value)">Send</button>
     </div>
   </div>
 </div>
