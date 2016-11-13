@@ -1,0 +1,10 @@
+LOCAL_USERNAME=`git log -n 1 --pretty=format:"%an"`
+REVISION=`git log -n 1 --pretty=format:"%H"`
+COMMENT=`git log -n 1 --pretty=format:"%s"`
+
+curl https://api.rollbar.com/api/1/deploy/ \
+  -F access_token=$LOGGING_ROLLBAR_TOKEN \
+  -F environment=$NODE_ENV \
+  -F revision=$REVISION \
+  -F local_username=$LOCAL_USERNAME \
+  -f comment=$COMMENT
