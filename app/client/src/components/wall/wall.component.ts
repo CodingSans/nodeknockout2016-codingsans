@@ -24,35 +24,60 @@ export class WallComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.channelService.getPublicChannels().subscribe((channels) => {
-      this.channels = channels.data;
+    this.channelService.getPublicChannels().subscribe((ret) => {
+      const channels = ret.data;
+
+      this.route.params.forEach((params: ChannelParams) => {
+        debugger;
+        const channel = this.setupChannels(params, channels);
+
+        this.currentChannel = channel;
+        this.channelService.currentChannel = channel;
+      });
     });
+    
     this.route.params.subscribe((params: ChannelParams) => {
       if (this.channels.length) {
+        debugger;
         if (params.name) {
-          const channel = _.find(this.channels, (channel: Channel) => {
-            return (params.name === channel.name);
-          });
-
-          if (!channel) {
-            return this.router.navigate(['/wall']);
-          }
-
-          _.forEach(this.channels, (channel: Channel) => {
-            const hash = md5(channel.name);
-            const data = new Identicon(hash).toString();
-            channel.icon = `data:image/png;base64,${data}`;
-          });
+          const channel = this.setupChannels(params, this.channels);
 
           this.currentChannel = channel;
-
-          this.channelService.getMessagesForChannel(this.currentChannel.name).subscribe(messages => {
-            this.messages = messages.data;
-          });
+          this.channelService.currentChannel = channel;
         } else {
-          return this.router.navigate(['/wall', this.channels[0].name]);
+          return this.router.navigate(['/wall', 'general', 'chat']);
         }
       }
+    });
+  }
+
+  setupChannels(params, channels): any {
+    let channelsExtend: Channel[] = _.concat([{ name: 'general', public: true }], channels);
+    const channelName = params.name;
+    let channel = this.getChannel(channelsExtend, channelName);
+    if (!channel) {   
+      channelsExtend = _.concat<Channel>(channelsExtend, [{ name: channelName, public: true }]);
+    }
+    channelsExtend = this.genIcons(channelsExtend);
+    channel = this.getChannel(channelsExtend, channelName);
+    this.channels = channelsExtend;
+
+    return channel;
+  }
+
+  getChannel(channels, channelName) {
+    return _.find(channels, (channel: Channel) => {
+      return (channelName === channel.name);
+    });
+  }
+
+  genIcons(channels) {
+    return _.map(channels, (channel: Channel) => {
+      const hash = md5(channel.name);
+      const data = new Identicon(hash).toString();
+      const channelObj = _.cloneDeep(channel);
+      channelObj.icon = `data:image/png;base64,${data}`;
+      return channelObj;
     });
   }
 

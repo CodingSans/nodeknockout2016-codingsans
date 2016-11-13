@@ -1,6 +1,6 @@
 import { Injectable, Inject }     from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
-import {Observable} from 'rxjs/Rx';
+import { Observable, Subject } from 'rxjs/Rx';
 
 // Import RxJs required methods
 import 'rxjs/add/operator/map';
@@ -10,6 +10,7 @@ export interface Channel {
   id?: string;
   name?: string;
   icon?: string;
+  public?: boolean;
 }
 
 export interface ChannelParams {
@@ -18,11 +19,17 @@ export interface ChannelParams {
 
 @Injectable()
 export class ChannelService {
+  public currentChannel: Channel;
+  public messageSubject = new Subject();
+
   constructor (@Inject(Http) private http: Http) {}
 
   getPublicChannels() : Observable<any> {
     return this.http.get('/api/v2/channel')
-      .map((res:Response) => res.json())
+      .map((res:Response) => {
+        debugger;
+        return res.json();
+      })
       .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
   }
 

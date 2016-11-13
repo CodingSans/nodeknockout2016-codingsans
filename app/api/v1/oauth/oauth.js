@@ -63,7 +63,7 @@ function * getRouter () {
       userid: user.id
     }
 
-    this.redirect('/wall')
+    this.redirect('/wall/general/chat')
   })
 
   return router
