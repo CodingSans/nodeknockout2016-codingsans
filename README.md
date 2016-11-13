@@ -36,7 +36,7 @@ However, the frontend was actually built on `Angular 2` and `Webpack`.
 
 ## Results?
 
-Well, we have a... mockup? Something like that :) We did not have enough time to wire everything, thus people can only authorize with Slack into the application, and honestly that's all :) The next screen is not wired at all, but we think you can get the idea from it.
+Well, we have a... mockup? Something like that :) We did not have enough time to wire everything, thus people can only authorize with Slack into the application, can create public channels, they can write messages with 5, 10 and 30 seconds desctruction time. If they allowed the geolocation API, the position is store to the message and all the message in a specific channel showed on the map and honestly that's all :)
 
 Take a look at it if you would like to: https://codingsans.2016.nodeknockout.com/
 
