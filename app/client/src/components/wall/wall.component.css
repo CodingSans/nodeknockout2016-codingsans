@@ -10,3 +10,9 @@
   text-decoration: none;
   color: grey;
 }
+
+.add-channel {
+  margin-right: 8px;
+  margin-top: 13px;
+  float: right;
+}

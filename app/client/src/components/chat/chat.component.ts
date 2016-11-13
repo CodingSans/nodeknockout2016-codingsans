@@ -55,12 +55,36 @@ export class ChatComponent {
     message: 'Amago Modoc sucker mummichog; atka mackerel: trout-perch longneck eel pencil catfish roundhead New Zealand smelt. Cavefish southern hake slimy sculpin; plaice Redfin perch tarpon, kingfish batfish.',
   }]
 
+  private dstructTime;
+
+  private currentMessage;
+
   constructor() {
+    this.dstructTime = 5;
+
     _.forEach(this.messages, (message: Message) => {
       const hash = md5(message.from);
       const data = new Identicon(hash).toString();
       message.icon = `data:image/png;base64,${data}`;
       message.when = moment(message.when).calendar();
     });
+  }
+
+  toggleDstructTime() {
+    switch (this.dstructTime) {
+      case 5:
+        this.dstructTime = 10;
+        break;
+      case 10:
+        this.dstructTime = 30;
+        break;
+      case 30:
+        this.dstructTime = 5;
+        break;
+    }
+  }
+
+  sendMessage() {
+    console.log(`Sending ${this.currentMessage}.`);
   }
 }

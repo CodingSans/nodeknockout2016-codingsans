@@ -20,8 +20,10 @@ interface ChannelParams {
   styleUrls: ['./wall.component.css']
 })
 export class WallComponent implements OnInit {
-  @ViewChild('sideMenu') sideMenu: ElementRef; 
+  @ViewChild('sideMenu') sideMenu: ElementRef;
+
   private currentChannel: Channel = {};
+
   private channels: Channel[] = [{
     id: '1',
     name: 'Topito',
@@ -32,6 +34,8 @@ export class WallComponent implements OnInit {
     id: '3',
     name: 'Burrito',
   }];
+
+  @ViewChild('myDialog') myDialog: ElementRef;
 
   constructor(
     @Inject(ActivatedRoute) private route: ActivatedRoute,
@@ -67,5 +71,18 @@ export class WallComponent implements OnInit {
     if (element.classList.contains('is-visible')) {
       element.classList.remove('is-visible');
     }
+  }
+
+  openDialog() {
+    this.closeSideMenu();
+    if (this.myDialog.nativeElement.showModal) {
+      this.myDialog.nativeElement.showModal();
+    } else {
+      console.log('Browser not supported for dialog.');
+    }
+  }
+
+  closeDialog() {
+    this.myDialog.nativeElement.close();
   }
 }
