@@ -30,7 +30,6 @@ export class WallComponent implements OnInit {
       const channels = ret.data;
 
       this.route.params.forEach((params: ChannelParams) => {
-        debugger;
         const channel = this.setupChannels(params, channels);
 
         this.currentChannel = channel;
@@ -40,7 +39,6 @@ export class WallComponent implements OnInit {
     
     this.route.params.subscribe((params: ChannelParams) => {
       if (this.channels.length) {
-        debugger;
         if (params.name) {
           const channel = this.setupChannels(params, this.channels);
 

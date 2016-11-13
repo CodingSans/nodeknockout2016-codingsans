@@ -26,10 +26,7 @@ export class ChannelService {
 
   getPublicChannels() : Observable<any> {
     return this.http.get('/api/v2/channel')
-      .map((res:Response) => {
-        debugger;
-        return res.json();
-      })
+      .map((res:Response) => res.json())
       .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
   }
 
