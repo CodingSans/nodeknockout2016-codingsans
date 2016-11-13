@@ -5,6 +5,7 @@ const mount = require('koa-mount')
 const helmet = require('koa-helmet')
 
 const { errorHandler } = require('../util/middleware/errorHandler')
+const { oauthUser } = require('../util/middleware/oauthUser')
 
 const v1Route = require('./v1/v1')
 const v2Route = require('./v2/v2')
@@ -14,6 +15,8 @@ function * init () {
 
   app.use(errorHandler)
   app.use(helmet())
+
+  app.use(oauthUser)
 
   const routes = yield {
     v1: v1Route.init(),

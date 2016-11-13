@@ -7,6 +7,16 @@ function * getMessagesForChannelByName (channelName, limit, skip) {
   return { data: messages, count }
 }
 
+function * getMessage (messageId) {
+  try {
+    return yield MessageDao.getMessage(messageId)
+  } catch (err) {
+    if (err.name !== 'CastError') {
+      throw err
+    }
+  }
+}
+
 function * createMessage (message) {
   const channel = yield ChannelDao.getChannelByName(message.channel)
   if (!channel.length) {
@@ -24,6 +34,7 @@ function * removeMessage (channelName, messageId) {
   return removed
 }
 
+exports.getMessage = getMessage
 exports.getMessagesForChannelByName = getMessagesForChannelByName
 exports.createMessage = createMessage
 exports.removeMessage = removeMessage
