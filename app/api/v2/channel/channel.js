@@ -1,5 +1,6 @@
 'use strict'
 
+const _ = require('lodash')
 const koaRouter = require('koa-router')
 const koaBetterBody = require('koa-better-body')
 
@@ -41,16 +42,8 @@ function * route () {
     const channelId = this.params.channelId
     const body = this.request.fields
 
-    // this.status = 204
-    this.body = {
-      count: 1,
-      data: [
-        {
-          content: `edit channel #${channelId}`,
-          editData: body
-        }
-      ]
-    }
+    yield ChannelService.createChannel(_.assign({}, body, { name: channelId }))
+    this.status = 204
   })
 
   router.use('/:channelId/message', routes.message.routes(), routes.message.allowedMethods())
