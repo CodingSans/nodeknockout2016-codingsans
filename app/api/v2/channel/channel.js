@@ -5,6 +5,8 @@ const koaBetterBody = require('koa-better-body')
 
 const messageRoute = require('./message/message')
 
+const ChannelService = require('../../../service/channel/channelService')
+
 function * route () {
   const router = koaRouter()
 
@@ -18,14 +20,7 @@ function * route () {
     const skip = Math.max(Number(this.query.s) || 0, 0)
 
     this.status = 200
-    this.body = {
-      count: 1,
-      data: [
-        {
-          content: `list all public channels queried by '${query}' limited by ${limit} skipped ${skip}`
-        }
-      ]
-    }
+    this.body = yield ChannelService.getPublicChannels(query, limit, skip)
   })
 
   router.get('/:channelId', function * () {
