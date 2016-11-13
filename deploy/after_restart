@@ -1,0 +1,5 @@
+#!/bin/bash
+LOCAL_USERNAME=`git log -n 1 --pretty=format:"%an"`
+REVISION=`git log -n 1 --pretty=format:"%H"`
+COMMENT=`git log -n 1 --pretty=format:"%s"`
+/data/codingsans/env.sh "$REVISION" "$LOCAL_USERNAME" "$COMMENT"
