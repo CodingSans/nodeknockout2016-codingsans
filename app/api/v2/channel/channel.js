@@ -34,15 +34,15 @@ function * route () {
     }
   })
 
-  router.put('/:channelId', koaBetterBody(), function * () {
-    const channelId = this.params.channelId
+  router.put('/:channelName', koaBetterBody(), function * () {
+    const channelName = this.params.channelName
     const body = this.request.fields
 
-    yield ChannelService.createChannel(_.assign({}, body, { name: channelId }))
+    yield ChannelService.createChannel(_.assign({}, body, { name: channelName }))
     this.status = 204
   })
 
-  router.use('/:channelId/message', routes.message.routes(), routes.message.allowedMethods())
+  router.use('/:channelName/message', routes.message.routes(), routes.message.allowedMethods())
 
   return router
 }

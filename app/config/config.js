@@ -19,11 +19,26 @@ const conf = convict({
     default: 'develop',
     env: 'NODE_ENV'
   },
+  sessionKey: {
+    format: String,
+    default: 'dstruct.session.key',
+    env: 'SESSION_SECRET_KEY'
+  },
   server: {
     port: {
       format: 'port',
       default: 5000,
       env: 'PORT'
+    },
+    protocol: {
+      format: ['http', 'https'],
+      default: 'http',
+      env: 'SERVER_PROTOCOL'
+    },
+    host: {
+      format: String,
+      default: 'localhost:5000',
+      env: 'SERVER_HOST'
     }
   },
   mongo: {
@@ -117,6 +132,20 @@ const conf = convict({
         format: 'port',
         default: 514,
         env: 'LOGGING_SYSLOG_PORT'
+      }
+    }
+  },
+  oauth: {
+    slack: {
+      key: {
+        format: String,
+        default: '',
+        env: 'OAUTH_SLACK_KEY'
+      },
+      secret: {
+        format: String,
+        default: '',
+        env: 'OAUTH_SLACK_SECRET'
       }
     }
   }
