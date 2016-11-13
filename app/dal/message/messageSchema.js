@@ -24,6 +24,12 @@ const schema = Mongoose.Schema({
   senderAvatar: {
     type: String
   },
+  latitude: {
+    type: Number
+  },
+  longitude: {
+    type: Number
+  },
   expireAt: {
     type: Date,
     validate: [(v) => {

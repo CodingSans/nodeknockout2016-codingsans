@@ -17,6 +17,19 @@ export interface ChannelParams {
   name?: string;
 }
 
+export interface Message {
+  senderId: string;
+  senderName: string;
+  updatedAt?: Date;
+  when?: Date | string;
+  content: string;
+  icon?: string;
+  latitude?: number;
+  longitude?: number;
+  position?: any;
+  marker?: any;
+}
+
 @Injectable()
 export class ChannelService {
   public currentChannel: Channel;
@@ -36,11 +49,17 @@ export class ChannelService {
       .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
   }
 
-  postMessageToChannel(channelName: string, message: string, expiry: Date) {
-    return this.http.post(`/api/v2/channel/${channelName}/message`, {
+  postMessageToChannel(channelName: string, message: string, expiry: Date, position?: any) {
+    const body: any = {
       content: message,
       expireAt: expiry,
-    })
+    };
+
+    if (position) {
+      body.latitude = position.latitude;
+      body.longitude = position.longitude;
+    }
+    return this.http.post(`/api/v2/channel/${channelName}/message`, body)
     .map((res:Response) => res.json())
     .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
   }
