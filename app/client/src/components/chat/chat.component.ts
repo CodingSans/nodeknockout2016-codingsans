@@ -70,7 +70,6 @@ export class ChatComponent implements OnInit {
 
   send(messageInput) {
     this.getLocation().then((position) => {
-      debugger;
       const message = messageInput.value;
       messageInput.value = '';
       const expiry = new Date(new Date().getTime() + this.dstructTime * 1000);
@@ -78,7 +77,6 @@ export class ChatComponent implements OnInit {
         this.messages.push(this.formatMessage(message.data[0]));
       });
     }).catch(() => {
-      debugger;
       const message = messageInput.value;
       messageInput.value = '';
       const expiry = new Date(new Date().getTime() + this.dstructTime * 1000);
