@@ -1,0 +1,18 @@
+.current-channel-icon {
+  object-fit: cover;
+  border-radius:50%;
+  width: 40px;
+  height: 40px;
+  margin-right: 5px;
+}
+
+.no-underline {
+  text-decoration: none;
+  color: grey;
+}
+
+.add-channel {
+  margin-right: 8px;
+  margin-top: 13px;
+  float: right;
+}

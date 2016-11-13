@@ -1,1 +1,8 @@
 node_modules
+yarn-error.log
+.env
+.env.develop
+.env.production
+.env.test
+.vscode/**
+app/client/build

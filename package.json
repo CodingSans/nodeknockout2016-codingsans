@@ -1,30 +1,108 @@
 {
-  "name": "nko2016-sample",
+  "name": "nko2016-codingsans",
   "version": "0.0.1",
-  "description": "A barebones Node.js app using Express 4",
-  "main": "index.js",
+  "description": "CodingSans NodeKnockout",
+  "main": "app/app.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node app/app.js",
+    "build": "node app/builder.js && cp -R ./app/client/public/* ./app/client/build/",
+    "test": "NODE_ENV=test mocha -r co-mocha './app/**/__tests__/**/*.spec.js'",
+    "lint": "standard"
   },
   "dependencies": {
-    "express": "^4.13.3"
+    "@slack/client": "^3.6.1",
+    "blueimp-md5": "^2.5.0",
+    "boom": "^4.2.0",
+    "bunyan": "^1.8.4",
+    "bunyan-prettystream": "^0.1.3",
+    "bunyan-rollbar": "^0.1.0",
+    "bunyan-syslog": "https://github.com/o20ne/node-bunyan-syslog.git#8279b07eabaaebfc81a1c8cc2af11b049d6fe859",
+    "co": "^4.6.0",
+    "convict": "^1.5.0",
+    "dotenv": "^2.0.0",
+    "es6-shim": "^0.35.1",
+    "grant-koa": "^3.6.5",
+    "koa": "^1.2.4",
+    "koa-better-body": "^3.0.2",
+    "koa-bunyan-logger": "^1.3.0",
+    "koa-connect-history-api-fallback": "0.3.0",
+    "koa-helmet": "git+ssh://git@github.com/venables/koa-helmet.git#koa-1",
+    "koa-mount": "^1.3.0",
+    "koa-router": "^5.4.0",
+    "koa-session": "^3.4.0",
+    "koa-static": "^2.0.0",
+    "lodash": "^4.16.6",
+    "moment": "^2.16.0",
+    "mongoose": "^4.6.7",
+    "rollbar": "^0.6.2"
+  },
+  "devDependencies": {
+    "@angular/common": "2.1.1",
+    "@angular/compiler": "2.1.1",
+    "@angular/core": "2.1.1",
+    "@angular/forms": "^2.1.1",
+    "@angular/http": "2.1.1",
+    "@angular/material": "^2.0.0-alpha.10",
+    "@angular/platform-browser": "2.1.1",
+    "@angular/platform-browser-dynamic": "2.1.1",
+    "@angular/router": "3.1.1",
+    "@types/chai": "^3.4.33",
+    "@types/core-js": "^0.9.34",
+    "@types/lodash": "^4.14.38",
+    "@types/node": "^6.0.46",
+    "angular2-template-loader": "^0.6.0",
+    "awesome-typescript-loader": "^2.2.4",
+    "co-mocha": "^1.1.3",
+    "codelyzer": "~1.0.0-beta.2",
+    "convict": "^1.5.0",
+    "copy-webpack-plugin": "^4.0.0",
+    "core-js": "^2.4.1",
+    "css-loader": "^0.25.0",
+    "dotenv": "^2.0.0",
+    "exports-loader": "^0.6.3",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "file-loader": "^0.9.0",
+    "html-loader": "^0.4.4",
+    "html-webpack-plugin": "^2.21.0",
+    "identicon.js": "^1.3.0",
+    "imports-loader": "^0.6.5",
+    "jshashes": "^1.0.5",
+    "json-loader": "^0.5.4",
+    "koa-webpack-dev-middleware": "^1.3.0",
+    "mocha": "^3.1.2",
+    "raw-loader": "0.5.1",
+    "rimraf": "^2.5.2",
+    "rxjs": "^5.0.0-rc.1",
+    "standard": "^8.5.0",
+    "style-loader": "^0.13.1",
+    "tslint": "^4.0.0-dev.0",
+    "typescript": "^2.0.6",
+    "webpack": "2.1.0-beta.25",
+    "webpack-dev-server": "2.1.0-beta.10",
+    "zone.js": "~0.6.25"
   },
   "engines": {
-    "node": "4.4.5"
+    "node": ">=6 <7",
+    "npm": ">=3.10"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/rumblex-community/nodeknockout-2016-starter"
   },
   "keywords": [
-    "node",
-    "heroku",
-    "express"
+    "node"
   ],
-  "author": "Mark Pundsack",
+  "author": "Coding Sans",
   "contributors": [
-    "Zeke Sikelianos <zeke@sikelianos.com> (http://zeke.sikelianos.com)",
-    "Jacques Crocker <jacques@nodeknockout.com> (https://www.nodeknockout.com)"
+    "Imre 'Rover' Racz <rover@ustream.tv> (https://www.linkedin.com/in/imre-racz-a48a3095)",
+    "Gabor 'LaTotty' Toth <latotty@codingsans.com> (https://www.codingsans.com)",
+    "Akos Szokodi <akos@codingsans.com>",
+    "Laszlo 'Lacka' Csele <lacka@codingsans.com> (https://hu.linkedin.com/in/lászló-csele-008754a5)"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "standard": {
+    "ignore": [
+      "app/client/**"
+    ]
+  }
 }

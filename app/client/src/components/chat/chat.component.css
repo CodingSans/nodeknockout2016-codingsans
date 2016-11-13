@@ -1,0 +1,67 @@
+.bottom-box {
+  background-color: white;
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  height: 100px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.time {
+  color: grey;
+  font-style: italic;
+  font-size: smaller;
+}
+
+.message-box {
+  flex: 1;
+}
+
+.message-input-box {
+  margin-left: 15px;
+  width: 98%;
+}
+
+.message-input {
+  resize: none;
+}
+
+.message {
+  white-space: normal;
+  color: black;
+  margin-left: 55px;
+  margin-top: 20px;
+  height: auto;
+}
+
+.user-icon {
+  object-fit: cover;
+  border-radius:50%;
+  width: 40px;
+  height: 40px;
+  margin: 5px;
+}
+
+.auto-height {
+  height: auto;
+}
+
+.mdl-list__item--three-line {
+  height: auto;
+  padding: 5px;
+}
+
+.mdl-list {
+  margin-bottom: 100px;
+}
+
+.option-box {
+  width: 200px;
+}
+
+.small-margin {
+  margin: 10px;
+}
