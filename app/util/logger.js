@@ -5,10 +5,20 @@ const config = require('../config/config')
 const streams = []
 
 if (config.logging.console.enabled) {
-  streams.push({
-    level: config.logging.console.level,
-    stream: process.stdout
-  })
+  if (config.logging.console.pretty) {
+    const PrettyStream = require('bunyan-prettystream')
+    const prettyStdOut = new PrettyStream()
+    prettyStdOut.pipe(process.stdout)
+    streams.push({
+      level: config.logging.console.level,
+      stream: prettyStdOut
+    })
+  } else {
+    streams.push({
+      level: config.logging.console.level,
+      stream: process.stdout
+    })
+  }
 }
 
 if (config.logging.syslog.enabled) {

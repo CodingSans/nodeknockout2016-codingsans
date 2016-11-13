@@ -29,6 +29,7 @@ function * initDev () {
   const compiler = webpack(webpackConfig)
   app.use(webpackDev(compiler, {
     noInfo: true,
+    quiet: config.client.quietWebpack,
     publicPath: webpackConfig.output.publicPath
   }))
 

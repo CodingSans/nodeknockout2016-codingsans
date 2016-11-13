@@ -39,6 +39,11 @@ const conf = convict({
       default: false,
       env: 'CLIENT_PREBUILDED'
     },
+    quietWebpack: {
+      format: Boolean,
+      default: true,
+      env: 'CLIENT_QUIET_WEBPACK'
+    },
     included: {
       debug: {
         format: Boolean,
@@ -56,13 +61,18 @@ const conf = convict({
     console: {
       enabled: {
         format: Boolean,
-        default: false,
+        default: true,
         env: 'LOGGING_CONSOLE_ENABLE'
       },
       level: {
         format: String,
         default: 'debug',
         env: 'LOGGING_CONSOLE_LEVEL'
+      },
+      pretty: {
+        formal: Boolean,
+        default: true,
+        env: 'LOGGING_CONSOLE_PRETTY'
       }
     },
     rollbar: {
