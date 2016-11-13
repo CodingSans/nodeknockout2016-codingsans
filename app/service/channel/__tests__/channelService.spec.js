@@ -5,7 +5,7 @@ const assert = require('assert')
 const { initDatabase, clearAllDb } = require('../../../util/__tests__/database')
 const ChannelService = require('../channelService')
 
-describe('Test message service', () => {
+describe('Test channel service', () => {
   before(function * () {
     yield initDatabase()
     yield clearAllDb()
