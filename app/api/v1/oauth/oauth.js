@@ -6,6 +6,8 @@ const mount = require('koa-mount')
 const Grant = require('grant-koa')
 const koaRouter = require('koa-router')
 
+const config = require('../../../config/config')
+
 const oauthUserService = require('../../../service/oauthUser/oauthUserService')
 
 function * init () {
@@ -13,15 +15,15 @@ function * init () {
 
   const grant = new Grant({
     server: {
-      protocol: 'http', // TODO config
-      host: 'localhost:5000', // TODO config
+      protocol: config.server.protocol,
+      host: config.server.host,
       callback: '/callback',
       path: '/api/v1/oauth',
       transport: 'querystring'
     },
     slack: {
-      key: '103243331568.103950555554',
-      secret: '2f8ad573156c90621951aedd54274073',
+      key: config.oauth.slack.key,
+      secret: config.oauth.slack.secret,
       callback: '/api/v1/oauth/callback/slack',
       scope: [
         'identity.basic',

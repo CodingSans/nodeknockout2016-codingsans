@@ -26,7 +26,7 @@ const start = co.wrap(function * start () {
     }
   }))
 
-  app.keys = ['session.key'] // TODO config
+  app.keys = [config.sessionKey]
   app.use(session({
     key: 'dstruct:sess',
     maxAge: 86400000,
