@@ -5,19 +5,19 @@ const assert = require('assert')
 const { initDatabase, clearAllDb } = require('../../../util/__tests__/database')
 const ChannelService = require('../channelService')
 
-describe('Test message service', () => {
+describe('Test channel service', () => {
   before(function * () {
     yield initDatabase()
     yield clearAllDb()
   })
 
-  it('it should be empty', function * () {
+  it('should be empty', function * () {
     const messages = yield ChannelService.getPublicChannels()
     assert.equal(messages.count, 0)
     assert.equal(messages.data.length, 0)
   })
 
-  it('it should create private channel', function * () {
+  it('should create private channel', function * () {
     const channel = {
       name: 'public 1',
       public: false
@@ -26,7 +26,7 @@ describe('Test message service', () => {
     assert.ok(created, 'Channel created')
   })
 
-  it('it should create public channel', function * () {
+  it('should create public channel', function * () {
     const channel = {
       name: 'public 2',
       public: true
@@ -38,7 +38,7 @@ describe('Test message service', () => {
     assert.equal(messages.data[0].name, channel.name)
   })
 
-  it('it should query public channel', function * () {
+  it('should query public channel', function * () {
     const channel1 = {
       name: 'test 1',
       public: true
@@ -70,7 +70,7 @@ describe('Test message service', () => {
     assert.equal(channels.data.length, 2)
   })
 
-  it('it should query limit public channel', function * () {
+  it('should query limit public channel', function * () {
     const channel = {
       name: 'limiter ',
       public: true
