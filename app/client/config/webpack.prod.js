@@ -19,7 +19,7 @@ module.exports.prod = () => ({
   },
 
   output: {
-    path: './app/client/build',
+    path: path.resolve(__dirname, '../build'),
     filename: '[name].bundle.js'
   },
 
@@ -31,21 +31,24 @@ module.exports.prod = () => ({
       },
       {
         test: /\.html$/,
-        loader: 'html'
+        loader: 'html-loader'
       },
       {
         test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)$/,
-        loader: 'file?name=assets/[name].[ext]'
+        loader: 'file-loader?name=assets/[name].[ext]'
       },
       {
         test: /\.css$/,
         exclude: helpers.root('src'),
-        loader: ExtractTextPlugin.extract('style', 'css?sourceMap')
+        loader: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: 'css-loader?sourceMap'
+        })
       },
       {
         test: /\.css$/,
         include: helpers.root('src'),
-        loader: 'raw'
+        loader: 'raw-loader'
       }
     ]
   },
